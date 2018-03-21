@@ -1,20 +1,19 @@
-var spline = new KeySpline(.3, 0.0, .1, 1)
+var eAnimation = new EKeys();
 
-var dur = 2;
-v1 = value;
-v2 = value+200;
+eAnimation.add(25, 0, 80, 33);
+eAnimation.add(50, 250, 80, 33);
 
-t1 = 0;
-t2 = 2;
+eAnimation.add(75, 250, 80, 33);
+eAnimation.add(100, 0, 80, 33);
 
-dv = v2-v1;
-dt = t2-t1;
+eAnimation.add(125, thisComp.width, 33, 33);
 
-var timeInput = Math.min(1, time/dt);
-var prg = spline.get(timeInput);
+eAnimation.anim();
 
-value + dv*prg
-
+/* Spline creation function
+    Copyright (c) 2012 Gaetan Renaudeau <renaudeau.gaetan@gmail.com>
+    https://gist.githubusercontent.com/gre/1926947/raw/a577b568ac1b8931737442b0ac370d27978dc3b5/KeySpline.js
+*/
 function KeySpline (mX1, mY1, mX2, mY2) {
 
   this.get = function(aX) {
@@ -47,4 +46,75 @@ function KeySpline (mX1, mY1, mX2, mY2) {
     }
     return aGuessT;
   }
+}
+
+// Expression Keys constructor
+function EKey(time, value, easeIn, easeOut) {
+    this.time = framesToTime(time);
+    this.value = value;
+    this.easeIn = easeIn;
+    this.easeOut = easeOut;
+}
+
+// eKeys Object
+function EKeys() {
+
+    this.keys = [];
+
+    this.add = function(time, value, easeIn, easeOut) {
+        this.keys.push(new EKey(time, value, easeIn, easeOut));
+    }
+
+    this.anim =  function() {
+
+        var lastKeyNum = this.keys.length-1;
+        var lastKey = this.keys[lastKeyNum];
+
+        // Check if time is outside of all animations
+        if (time <= this.keys[0].time) {
+            return this.keys[0].value;
+        } else if (time >= lastKey.time) {
+            return lastKey.value;
+        } else {
+            
+            curKeyNum = 0;
+
+            // Set current key to most recent keyframe
+            while (curKeyNum < lastKeyNum && time >= this.keys[curKeyNum+1].time) {
+                curKeyNum++
+            }
+
+            var curKey = this.keys[curKeyNum];
+            var nextKey = this.keys[curKeyNum+1];
+
+            // Create easing spline
+            var spline = new KeySpline(curKey.easeOut/100, 0.0, 1-(nextKey.easeIn/100), 1)
+
+            // Animation details
+            var v1 = curKey.value;
+            var v2 = nextKey.value
+
+            var t1 = curKey.time;
+            var t2 = nextKey.time;
+
+            // Delta calculations
+            var deltaV = v2-v1;
+            var deltaT = t2-t1;
+
+            // Move animation to t1
+            var movedTime = time - t1;
+            if (movedTime <= 0) {
+                movedTime = 0;
+            }
+
+            // Map time to speed
+            var timeInput = Math.min(1, movedTime/deltaT);
+
+            // Get progress value according to spline
+            var prg = spline.get(timeInput);
+
+            // Animate between values according to progress
+            return v1 + deltaV*prg
+        }
+    }
 }
