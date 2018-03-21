@@ -66,3 +66,7 @@ eAnimation.anim();
 * The expression has only currently been tested with 1-dimensional properties
 * There is no input validation or error checking
 * Strange results are produced when very steep easing curves are used due to the curve sampling method used (dichotomic search)
+
+## License
+
+This project is licensed under the terms of the MIT license.
