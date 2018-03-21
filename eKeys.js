@@ -1,18 +1,3 @@
-// Create new animation group
-var eAnimation = new EKeys();
-
-// Add keyframes to group
-eAnimation.add(25, 0, 80, 33);
-eAnimation.add(50, 250, 80, 33);
-
-eAnimation.add(75, 250, 80, 33);
-eAnimation.add(100, 0, 80, 33);
-
-eAnimation.add(125, thisComp.width, 33, 33);
-
-// Animate animation group
-eAnimation.anim();
-
 // Expression Keys constructor
 function EKey(time, value, easeIn, easeOut) {
     this.time = framesToTime(time);
