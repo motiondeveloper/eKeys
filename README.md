@@ -1,10 +1,10 @@
 # eKeys
-Methods for doing keyframe animation in Adobe After Effects using expressions.
+Method for doing keyframe animation in Adobe After Effects using expressions.
 
 ## Overview
-eKeys is a system of doing animation in Adobe After effects entirely within expressions, with the same level on control as keyframes. It comes in the form of an expression to be applied to each property you wish to animate, with the properties for each "keyframe" to be added in the expression.
+eKeys is a system of doing animation in Adobe After effects entirely within expressions, with the same level on control as keyframes. It comes in the form of an expression to be applied to each property you wish to animate, with the values for each "keyframe" to be added in the expression.
 
-Its purpose is to speed up the creation of After Effects templates and other automated and expression heavy work.
+Its purpose is to speed up the creation of After Effects templates and other automated work.
 
 ## Usage
 
@@ -22,7 +22,7 @@ Its purpose is to speed up the creation of After Effects templates and other aut
 
 3. Add Keframes to the Animation Group
 
-   Each keyframe must be added to a specific animation group, with the syntax of:
+   Each eKey must be added to a specific animation group, with the syntax of:
 
    ```javascript
    animationGroupName.add(keyTime, keyValue, easeIn, easeOut);
@@ -70,3 +70,11 @@ eAnimation.anim();
 ## License
 
 This project is licensed under the terms of the MIT license.
+
+## Contact
+
+If you have any questions, feedback or anything else feel free to contact me at:
+
+```
+tim@haywood.org
+```

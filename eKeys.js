@@ -1,4 +1,4 @@
-// Expression Keys constructor
+// Expression Key constructor
 function EKey(time, value, easeIn, easeOut) {
     this.time = framesToTime(time);
     this.value = value;
@@ -20,11 +20,13 @@ function EKeys() {
         var lastKeyNum = this.keys.length - 1;
         var lastKey = this.keys[lastKeyNum];
 
-        // Check if time is outside of all animations
+        // Check if time is outside of all keys
         if (time <= this.keys[0].time) {
             return this.keys[0].value;
         } else if (time >= lastKey.time) {
             return lastKey.value;
+
+        // Otherwise animate between keys
         } else {
 
             curKeyNum = 0;
@@ -37,7 +39,7 @@ function EKeys() {
             var curKey = this.keys[curKeyNum];
             var nextKey = this.keys[curKeyNum + 1];
 
-            // Create easing spline
+            // Create easing spline based on current and next key
             var spline = new KeySpline(curKey.easeOut / 100, 0.0, 1 - (nextKey.easeIn / 100), 1)
 
             // Animation details
@@ -63,7 +65,7 @@ function EKeys() {
             // Get progress value according to spline
             var prg = spline.get(timeInput);
 
-            // Animate between values according to progress
+            // Animate between values according to progress amount
             return v1 + deltaV * prg
         }
     }
