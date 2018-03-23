@@ -8,7 +8,7 @@ Its purpose is to speed up the creation of After Effects templates and other aut
 
 ## Usage
 
-1. Copy the required code from the `eKeys.js` file into the expression.
+1. Copy the required code from the `eKeys.js` file into the expression
 
 2. Create an Animation Group
 
@@ -22,7 +22,7 @@ Its purpose is to speed up the creation of After Effects templates and other aut
 
 3. Add Keframes to the Animation Group
 
-   Each eKey must be added to a specific animation group, with the syntax of:
+   Each eKey must be added to a specific animation group, with the syntax of:
 
    ```javascript
    animationGroupName.add(keyTime, keyValue, easeIn, easeOut);
