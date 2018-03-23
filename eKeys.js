@@ -40,7 +40,7 @@ function EKeys() {
             var nextKey = this.keys[curKeyNum + 1];
 
             // Create easing spline based on current and next key
-            var spline = new KeySpline(curKey.easeOut / 100, 0.0, 1 - (nextKey.easeIn / 100), 1)
+            var easeSpline = new KeySpline(curKey.easeOut / 100, 0.0, 1 - (nextKey.easeIn / 100), 1)
 
             // Animation details
             var v1 = curKey.value;
@@ -63,7 +63,7 @@ function EKeys() {
             var timeInput = Math.min(1, movedTime / deltaT);
 
             // Get progress value according to spline
-            var prg = spline.get(timeInput);
+            var prg = easeSpline.get(timeInput);
 
             // Animate between values according to progress amount
             return v1 + deltaV * prg
