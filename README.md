@@ -8,9 +8,9 @@ Its purpose is to speed up the creation of After Effects templates and other aut
 
 ## Usage
 
-1. Copy the required code from the `eKeys.js` file into the expression
+1. **Copy the required code from the `eKeys.js` file into the expression**
 
-2. Create an Animation Group
+2. **Create an Animation Group**
 
    Animation groups are collections of keyframes, and are created with the line:
 
@@ -20,7 +20,7 @@ Its purpose is to speed up the creation of After Effects templates and other aut
 
    You can create as many of these groups as you like, with seperate keyframes in each group. This comes in handy when you need to toggle between different animations, while still having the ability to have them within the same expression.
 
-3. Add Keframes to the Animation Group
+3. **Add Keframes to the Animation Group**
 
    Each eKey must be added to a specific animation group, with the syntax of:
 
@@ -35,13 +35,14 @@ Its purpose is to speed up the creation of After Effects templates and other aut
 
    The expression also supports custom incoming and outgoing velocities (via setting the y value of the easing curve tangents), but for the sake of input simplicity they are currently not accessible. A incoming and outgoing velocity of 0 is used.
 
-4. Animate the keyframe group
+4. **Animate the keyframe group**
 
     The keyframe group animation is called via the line:
 
     ```javascript
     animationGroupName.anim();
     ````
+
 
 The main advantage is that every property of a keyframe (it's time, value and easing) is set via expressions. This means they can easily be controlled and linked to other properties, a must when doing any sort of templating or automation within after effects.
 
