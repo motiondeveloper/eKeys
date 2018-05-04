@@ -7,7 +7,7 @@ function EKey(time, value, easeIn, easeOut) {
 }
 
 // Animation group constructor
-function EKeys() {
+function AnimGroup() {
 
     this.keys = [];
 

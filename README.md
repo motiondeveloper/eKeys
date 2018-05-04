@@ -13,7 +13,7 @@ Its purpose is to speed up the creation of After Effects templates and other aut
    Animation groups are collections of keyframes, and are created with the line:
 
    ```javascript
-   var animationGroupName = new EKeys();
+   var animationGroupName = new AnimGroup();
    ```
 
    You can create as many of these groups as you like, with separate keyframes in each group. This comes in handy when you need to toggle between different animations, while still having the ability to have them within the same expression.
@@ -49,14 +49,14 @@ An example setup of an animation group with a couple of keyframes:
 
 ```javascript
 // Create new animation group
-var eAnimation = new EKeys();
+var animIn = new animGroup();
 
 // Add keyframes to group
-eAnimation.add(25, 0, 33, 80);
-eAnimation.add(50, thisComp.width/2, 80, 33);
+animIn.add(25, 0, 33, 80);
+animIn.add(50, thisComp.width/2, 80, 33);
 
 // Animate animation group
-eAnimation.anim();
+animIn.anim();
 ```
 
 ## Limitations
