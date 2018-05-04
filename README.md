@@ -1,7 +1,5 @@
 # eKeys
-Method for doing keyframe animation in Adobe After Effects using expressions.
 
-## Overview
 eKeys is a system of doing animation in Adobe After effects entirely within expressions, with the same level on control as keyframes. It comes in the form of an expression to be applied to each property you wish to animate, with the values for each "keyframe" to be added in the expression.
 
 Its purpose is to speed up the creation of After Effects templates and other automated work.
