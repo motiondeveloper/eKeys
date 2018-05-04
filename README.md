@@ -16,7 +16,7 @@ Its purpose is to speed up the creation of After Effects templates and other aut
    var animationGroupName = new EKeys();
    ```
 
-   You can create as many of these groups as you like, with seperate keyframes in each group. This comes in handy when you need to toggle between different animations, while still having the ability to have them within the same expression.
+   You can create as many of these groups as you like, with separate keyframes in each group. This comes in handy when you need to toggle between different animations, while still having the ability to have them within the same expression.
 
 3. **Add Keframes to the Animation Group**
 
@@ -41,7 +41,6 @@ Its purpose is to speed up the creation of After Effects templates and other aut
     animationGroupName.anim();
     ````
 
-
 The main advantage is that every property of a keyframe (it's time, value and easing) is set via expressions. This means they can easily be controlled and linked to other properties, a must when doing any sort of templating or automation within after effects.
 
 ## Example
@@ -62,9 +61,9 @@ eAnimation.anim();
 
 ## Limitations
 
-* The expression has only currently been tested with 1-dimensional properties
-* There is no input validation or error checking
-* Strange results are produced when very steep easing curves are used due to the curve sampling method used (dichotomic search)
+- The expression has only currently been tested with 1-dimensional properties
+- There is no input validation or error checking
+- Strange results are produced when very steep easing curves are used due to the curve sampling method used (dichotomic search)
 
 ## License
 
@@ -74,6 +73,4 @@ This project is licensed under the terms of the MIT license.
 
 If you have any questions, feedback or anything else feel free to contact me at:
 
-```
-tim@haywood.org
-```
+`tim@haywood.org`
