@@ -49,7 +49,7 @@ An example setup of an animation group with a couple of keyframes:
 
 ```javascript
 // Create new animation group
-var animIn = new animGroup();
+var animIn = new AnimGroup();
 
 // Add keyframes to group
 animIn.add(25, 0, 33, 80);
