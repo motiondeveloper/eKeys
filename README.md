@@ -6,19 +6,31 @@ Its purpose is to speed up the creation of After Effects templates and other aut
 
 ## Usage
 
-1. **Copy the required code from the `eKeys.js` file into the expression**
+1. **Download and import `eKeys.jsx` into your After Effects project**
 
-2. **Create an Animation Group**
+   This is the JSON file that contains the necesary code to run eKeys. You may not be able to drag and drop it into your project, in which case you will need to use the import dialog.
+
+   **Note:** eKeys is only compatable with After Effects versions >= 15.1.
+
+2. **Add a refrence to the library in your expression**
+
+   To refrence the library in an expression, you need to assign it to a variable. This is done via the line:
+
+   ```javascript
+   var eKeys =  = footage("eKeys.jsx").sourceData;
+   ```
+
+3. **Create an Animation Group**
 
    Animation groups are collections of keyframes, and are created with the line:
 
    ```javascript
-   var animationGroupName = new AnimGroup();
+   var animationGroupName = new eKeys.AnimGroup();
    ```
 
    You can create as many of these groups as you like, with separate keyframes in each group. This comes in handy when you need to toggle between different animations, while still having the ability to have them within the same expression.
 
-3. **Add Keframes to the Animation Group**
+4. **Add Keframes to the Animation Group**
 
    Each eKey must be added to a specific animation group, with the syntax of:
 
@@ -33,7 +45,7 @@ Its purpose is to speed up the creation of After Effects templates and other aut
 
    The expression also supports custom incoming and outgoing velocities (via setting the y value of the easing curve tangents), but for the sake of input simplicity they are currently not accessible. A incoming and outgoing velocity of 0 is used.
 
-4. **Animate the keyframe group**
+5. **Animate the keyframe group**
 
     The keyframe group animation is called via the line:
 
@@ -48,8 +60,11 @@ The main advantage is that every property of a keyframe (it's time, value and ea
 An example setup of an animation group with a couple of keyframes:
 
 ```javascript
+// Import eKeys library
+var eKeys =  = footage("eKeys.jsx").sourceData;
+
 // Create new animation group
-var animIn = new AnimGroup();
+var animIn = new eKeys.AnimGroup();
 
 // Add keyframes to group
 animIn.add(25, 0, 33, 80);
