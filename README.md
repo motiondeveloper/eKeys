@@ -17,7 +17,7 @@ Its purpose is to speed up the creation of After Effects templates and other aut
    To refrence the library in an expression, you need to assign it to a variable. This is done via the line:
 
    ```javascript
-   var eKeys =  = footage("eKeys.jsx").sourceData;
+   var eKeys = footage("eKeys.jsx").sourceData;
    ```
 
 3. **Create an Animation Group**
