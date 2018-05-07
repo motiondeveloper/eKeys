@@ -61,7 +61,7 @@ An example setup of an animation group with a couple of keyframes:
 
 ```javascript
 // Import eKeys library
-var eKeys =  = footage("eKeys.jsx").sourceData;
+var eKeys = footage("eKeys.jsx").sourceData;
 
 // Create new animation group
 var animIn = new eKeys.AnimGroup();
