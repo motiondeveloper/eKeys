@@ -76,7 +76,6 @@ animIn.anim();
 
 ## Limitations
 
-- The expression has only currently been tested with 1-dimensional properties
 - There is no input validation or error checking
 - Strange results are produced when very steep easing curves are used due to the curve sampling method used (dichotomic search)
 
