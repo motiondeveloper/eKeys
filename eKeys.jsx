@@ -3,8 +3,8 @@
         
         this.keys = [];
         
-        this.add = function (keyTime, value, easeIn, easeOut) {
-            this.keys.push(new EKey(keyTime, value, easeIn, easeOut));
+        this.add = function (keyTime, value, easeIn, easeOut, velocityIn, velocityOut) {
+            this.keys.push(new EKey(keyTime, value, easeIn, easeOut, velocityIn, velocityOut));
         }
         
         this.anim = function () {
@@ -25,18 +25,18 @@
                 
                 // Set current key to most recent keyframe
                 while (curKeyNum < lastKeyNum && time >= this.keys[curKeyNum + 1].time) {
-                    curKeyNum++
+                    curKeyNum++;
                 }
                 
                 var curKey = this.keys[curKeyNum];
                 var nextKey = this.keys[curKeyNum + 1];
                 
                 // Create easing spline based on current and next key
-                var easeSpline = bezier(curKey.easeOut / 100, 0.0, 1 - (nextKey.easeIn / 100), 1)
+                var easeSpline = bezier(curKey.easeOut / 100, curKey.velocityOut / 100, 1 - (nextKey.easeIn / 100), curKey.velocityIn);
                 
                 // Animation details
                 var v1 = curKey.value;
-                var v2 = nextKey.value
+                var v2 = nextKey.value;
                 
                 var t1 = curKey.time;
                 var t2 = nextKey.time;
@@ -63,11 +63,14 @@
         }
         
         // Keyframe object constructor
-        function EKey(keyTime, value, easeIn, easeOut) {
+        function EKey(keyTime, value, easeIn, easeOut, velocityIn, velocityOut) {
+
             this.time = keyTime;
             this.value = value;
             this.easeIn = easeIn;
             this.easeOut = easeOut;
+            this.velocityIn = (typeof velocityIn !== 'undefined') ?  velocityIn : 100;
+            this.velocityOut = (typeof velocityOut !== 'undefined') ?  velocityOut : 0;
         }
         
         /**
