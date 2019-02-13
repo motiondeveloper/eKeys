@@ -32,7 +32,7 @@
                 var nextKey = this.keys[curKeyNum + 1];
                 
                 // Create easing spline based on current and next key
-                var easeSpline = bezier(curKey.easeOut / 100, curKey.velocityOut / 100, 1 - (nextKey.easeIn / 100), curKey.velocityIn);
+                var easeSpline = bezier(curKey.easeOut / 100, curKey.velocityOut / 100, 1 - (nextKey.easeIn / 100), 1 - (curKey.velocityIn / 100));
                 
                 // Animation details
                 var v1 = curKey.value;

@@ -35,15 +35,15 @@ Its purpose is to speed up the creation of After Effects templates and other aut
    Each eKey must be added to a specific animation group, with the syntax of:
 
    ```javascript
-   animationGroupName.add(keyTime, keyValue, easeIn, easeOut);
+   animationGroupName.add(keyTime, keyValue, easeIn, easeOut, velocityIn, velocityOut);
    ```
 
-   - keyTime: Where the keyframe is in time, in frames
-   - keyValue: Value of the keyframe
+   - keyTime: Where the keyframe is in time, in seconds
+   - keyValue: Value of the keyframe (can be value or array)
    - easeIn: Ease in amount [0-100]
    - easeOut: Ease out amount [0-100]
-
-   The expression also supports custom incoming and outgoing velocities (via setting the y value of the easing curve tangents), but for the sake of input simplicity they are currently not accessible. A incoming and outgoing velocity of 0 is used.
+   - (Optional) velocityIn: Incoming speed [0-100]
+   - (Optional) velocityOut: Outgoing speed [0-100]
 
 5. **Animate the keyframe group**
 
@@ -74,9 +74,9 @@ animIn.add(50, thisComp.width/2, 80, 33);
 animIn.anim();
 ```
 
-## Limitations
+## To Do
 
-- There is no input validation or error checking
+- Input validation and error checking
 
 ## License
 
