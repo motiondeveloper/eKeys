@@ -77,7 +77,6 @@ animIn.anim();
 ## Limitations
 
 - There is no input validation or error checking
-- Strange results are produced when very steep easing curves are used due to the curve sampling method used (dichotomic search)
 
 ## License
 
