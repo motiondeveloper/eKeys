@@ -6,7 +6,7 @@ Its purpose is to speed up the creation of After Effects templates and other aut
 
 ## Usage
 
-1. **Download and import [`eKeys.jsx`](https://github.com/timhaywood/eKeys/raw/master/eKeys.jsx) into your After Effects project**
+1. **Download and import [`eKeys.jsx`](https://github.com/motiondeveloper/eKeys/raw/master/eKeys.jsx) into your After Effects project**
 
    This is the JSON file that contains the necesary code to run eKeys. You may not be able to drag and drop it into your project, in which case you will need to use the import dialog.
 
