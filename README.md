@@ -67,8 +67,8 @@ var eKeys = footage("eKeys.jsx").sourceData;
 var animIn = new eKeys.AnimGroup();
 
 // Add keyframes to group
-animIn.add(25, 0, 33, 80);
-animIn.add(50, thisComp.width/2, 80, 33);
+animIn.add(1, 0, 33, 80);
+animIn.add(2, thisComp.width/2, 80, 33);
 
 // Animate animation group
 animIn.anim();
