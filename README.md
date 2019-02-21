@@ -83,9 +83,3 @@ animIn.anim();
 This project is licensed under the terms of the GNU GPLv3 license. In summary:
 
 > Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.
-
-## Contact
-
-If you have any questions, feedback or anything else feel free to contact me at:
-
-`tim@haywood.org`
