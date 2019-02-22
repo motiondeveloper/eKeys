@@ -1,5 +1,7 @@
 {
     "AnimGroup": function() {
+
+        // Version 2.1.2
         
         this.keys = [];
         
