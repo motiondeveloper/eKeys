@@ -77,6 +77,7 @@ animIn.anim();
 ## To Do
 
 - Input validation and error checking
+- Add animation method input (overshoot, bounce etc)
 
 ## License
 
