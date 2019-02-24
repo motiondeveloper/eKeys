@@ -76,6 +76,8 @@ animIn.anim();
 
 ## To Do
 
+- [x] ~~Add incoming and outgoing velocity inputs~~
+- [x] ~~Updated curve sampling to Newton-Raphson~~
 - [ ] Input validation and error checking
 - [ ] Add animation method input (overshoot, bounce etc)
 
