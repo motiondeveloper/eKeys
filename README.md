@@ -1,8 +1,18 @@
-# eKeys
+# Overview
 
 eKeys is a system of doing animation in Adobe After effects entirely within expressions, with the same level on control as keyframes. It comes in the form of a JSON file that's imported into the project, and a set of expressions to be applied to each property you wish to animate, with the values for each "keyframe" to be added in the expression.
 
 Its purpose is to speed up the creation of After Effects templates and other automated work.
+
+## Contents
+
+- [Overview](#overview)
+  - [Contents](#contents)
+  - [Usage](#usage)
+  - [Example](#example)
+  - [To Do](#to-do)
+  - [License](#license)
+  - [Contact](#contact)
 
 ## Usage
 
