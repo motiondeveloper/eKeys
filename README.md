@@ -30,7 +30,7 @@ Its purpose is to speed up the creation of After Effects templates and other aut
 
    You can create as many of these groups as you like, with separate keyframes in each group. This comes in handy when you need to toggle between different animations, while still having the ability to have them within the same expression.
 
-4. **Add Keframes to the Animation Group**
+4. **Add Keyframes to the Animation Group**
 
    Each eKey must be added to a specific animation group, with the syntax of:
 
