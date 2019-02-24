@@ -8,13 +8,13 @@ Its purpose is to speed up the creation of After Effects templates and other aut
 
 1. **Download and import [`eKeys.jsx`](https://github.com/motiondeveloper/eKeys/raw/master/eKeys.jsx) into your After Effects project**
 
-   This is the JSON file that contains the necesary code to run eKeys. You may not be able to drag and drop it into your project, in which case you will need to use the import dialog.
+   This is the JSON file that contains the necessary code to run eKeys. You may not be able to drag and drop it into your project, in which case you will need to use the import dialog.
 
-   **Note:** eKeys is only compatable with After Effects versions >= 15.1.
+   **Note:** eKeys is only compatible with After Effects versions >= 15.1.
 
-2. **Add a refrence to the library in your expression**
+2. **Add a reference to the library in your expression**
 
-   To refrence the library in an expression, you need to assign it to a variable. This is done via the line:
+   To reference the library in an expression, you need to assign it to a variable. This is done via the line:
 
    ```javascript
    var eKeys = footage("eKeys.jsx").sourceData;
@@ -53,7 +53,7 @@ Its purpose is to speed up the creation of After Effects templates and other aut
     animationGroupName.anim();
     ````
 
-The main advantage is that every property of a keyframe (it's time, value and easing) is set via expressions. This means they can easily be controlled and linked to other properties, a must when doing any sort of templating or automation within after effects.
+The main advantage is that every property of a keyframe (it's time, value and easing) is set via expressions. This means they can easily be controlled and linked to other properties, a must when doing any sort of template creation or automation within after effects.
 
 ## Example
 
