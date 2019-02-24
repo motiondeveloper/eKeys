@@ -78,6 +78,7 @@ animIn.anim();
 
 - [x] ~~Add incoming and outgoing velocity inputs~~
 - [x] ~~Updated curve sampling to Newton-Raphson~~
+- [ ] Update to Javascript engine (from ExtendScript)
 - [ ] Input validation and error checking
 - [ ] Add animation method input (overshoot, bounce etc)
 
