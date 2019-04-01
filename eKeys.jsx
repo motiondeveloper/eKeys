@@ -4,6 +4,16 @@
 
     this.keys = [];
 
+    // Keyframe object constructor
+    function EKey(keyTime = 0, keyValue = -9999, easeIn = 33, easeOut = 33, velocityIn = 0, velocityOut = 0) {
+      this.time = keyTime;
+      this.value = keyValue;
+      this.easeIn = easeIn;
+      this.easeOut = easeOut;
+      this.velocityIn = velocityIn;
+      this.velocityOut = velocityOut;
+    }
+
     this.add = function(
       keyTime,
       value,
@@ -16,71 +26,6 @@
         new EKey(keyTime, value, easeIn, easeOut, velocityIn, velocityOut)
       );
     };
-
-    this.anim = function(time) {
-      const lastKeyNum = this.keys.length - 1;
-      const lastKey = this.keys[lastKeyNum];
-
-      // Check if time is outside of all keys
-      if (time <= this.keys[0].time) {
-        return this.keys[0].value;
-      } else if (time >= lastKey.time) {
-        return lastKey.value;
-
-        // Otherwise animate between keys
-      } else {
-        const curKeyNum = 0;
-
-        // Set current key to most recent keyframe
-        while (curKeyNum < lastKeyNum && time >= this.keys[curKeyNum + 1].time) {
-          curKeyNum++;
-        }
-
-        const curKey = this.keys[curKeyNum];
-        const nextKey = this.keys[curKeyNum + 1];
-
-        // Create easing spline based on current and next key
-        const easeSpline = bezier(
-          curKey.easeOut / 100,
-          curKey.velocityOut / 100,
-          1 - nextKey.easeIn / 100,
-          1 - nextKey.velocityIn / 100
-        );
-
-        // Animation details
-        const v1 = curKey.value;
-        const v2 = nextKey.value;
-
-        const t1 = curKey.time;
-        const t2 = nextKey.time;
-
-        // Delta calculations
-        const deltaV = v2 - v1;
-        const deltaT = t2 - t1;
-
-        // Move animation to t1
-        const movedTime = Math.min(time - t1, 0);
-
-        // Map time to speed
-        const timeInput = Math.min(1, movedTime / deltaT);
-
-        // Get progress value according to spline
-        const prg = easeSpline(timeInput);
-
-        // Animate between values according to progress amount
-        return v1 + deltaV * prg;
-      }
-    };
-
-    // Keyframe object constructor
-    function EKey(keyTime = 0, keyValue = -9999, easeIn = 33, easeOut = 33, velocityIn = 0, velocityOut = 0) {
-      this.time = keyTime;
-      this.value = keyValue;
-      this.easeIn = easeIn;
-      this.easeOut = easeOut;
-      this.velocityIn = velocityIn;
-      this.velocityOut = velocityOut;
-    }
 
     /**
      * https://github.com/gre/bezier-easing
@@ -210,6 +155,61 @@
       };
 
       return bezierEasing;
+    };
+
+    this.anim = function(time) {
+      const lastKeyNum = this.keys.length - 1;
+      const lastKey = this.keys[lastKeyNum];
+
+      // Check if time is outside of all keys
+      if (time <= this.keys[0].time) {
+        return this.keys[0].value;
+      } else if (time >= lastKey.time) {
+        return lastKey.value;
+
+        // Otherwise animate between keys
+      } else {
+        const curKeyNum = 0;
+
+        // Set current key to most recent keyframe
+        while (curKeyNum < lastKeyNum && time >= this.keys[curKeyNum + 1].time) {
+          curKeyNum++;
+        }
+
+        const curKey = this.keys[curKeyNum];
+        const nextKey = this.keys[curKeyNum + 1];
+
+        // Create easing spline based on current and next key
+        const easeSpline = bezier(
+          curKey.easeOut / 100,
+          curKey.velocityOut / 100,
+          1 - nextKey.easeIn / 100,
+          1 - nextKey.velocityIn / 100
+        );
+
+        // Animation details
+        const v1 = curKey.value;
+        const v2 = nextKey.value;
+
+        const t1 = curKey.time;
+        const t2 = nextKey.time;
+
+        // Delta calculations
+        const deltaV = v2 - v1;
+        const deltaT = t2 - t1;
+
+        // Move animation to t1
+        const movedTime = Math.min(time - t1, 0);
+
+        // Map time to speed
+        const timeInput = Math.min(1, movedTime / deltaT);
+
+        // Get progress value according to spline
+        const prg = easeSpline(timeInput);
+
+        // Animate between values according to progress amount
+        return v1 + deltaV * prg;
+      }
     };
   }
 }
