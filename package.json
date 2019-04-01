@@ -1,0 +1,29 @@
+{
+  "name": "ekeys",
+  "version": "1.0.0",
+  "description": "Animation engine for After Effects expressions",
+  "main": "eKeys.jsx",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/motiondeveloper/eKeys.git"
+  },
+  "keywords": [
+    "after",
+    "effects",
+    "expressions",
+    "easing"
+  ],
+  "author": "Tim Haywood",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/motiondeveloper/eKeys/issues"
+  },
+  "homepage": "https://github.com/motiondeveloper/eKeys#readme",
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "prettier": "^1.16.4"
+  }
+}
