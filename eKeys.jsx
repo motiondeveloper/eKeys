@@ -158,7 +158,8 @@
     };
 
     this.anim = function animateBetweenKeys(time) {
-      const lastKey = this.keys[this.keys.length - 1];
+      const lastKeyNum = this.keys.length - 1;
+      const lastKey = this.keys[lastKeyNum];
 
       // Check if time is outside of all keys
       if (time <= this.keys[0].time) {
