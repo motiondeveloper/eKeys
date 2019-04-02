@@ -188,20 +188,41 @@
       );
 
       // Delta calculations
-      const deltaV = nextKey.value - curKey.value;
       const deltaT = nextKey.time - curKey.time;
-
+      
       // Move animation to t1
       const movedTime = Math.max(time - curKey.time, 0);
-
+      
       // Map time to speed
       const timeInput = Math.min(1, movedTime / deltaT);
-
+      
       // Get progress value according to spline
       const progress = easingCurve(timeInput);
+      
+      // Performs animation on each element of array individually
+      const animateArrayFromProgress = (startArray, endArray, progressAmount) => {
+        // Array Subtraction
+        const arrayDelta = endArray.map((item, index) => {
+          return item - startArray[index];
+        });
+        // Multiply difference by progress
+        const deltaProgressed = arrayDelta.map(item => item * progressAmount);
+        // Add to current key and return
+        return startArray.map((item, index) => {
+          return item + deltaProgressed[index];
+        });
+      }
+      // Animate between values according to progress
+      const animateValueFromProgress = (startVal, endVal, progressAmount) => {
+        const valueDelta = endVal - startVal;
+        return startVal + valueDelta * progressAmount;
+      }
 
-      // Animate between values according to progress amount
-      return curKey.value + deltaV * progress;
+      // Animate according to whether values are an array
+      const animateProps = [curKey.value, nextKey.value, progress];
+      return (Array.isArray(curKey.value) || Array.isArray(nextKey).value) ?
+        animateArrayFromProgress(...animateProps) :
+        animateValueFromProgress(...animateProps);
     };
   }
 }
