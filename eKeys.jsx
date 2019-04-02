@@ -166,9 +166,8 @@
       }
       if (time >= lastKey.time) {
         return lastKey.value;
-
-        // Otherwise animate between keys
       }
+      // Otherwise animate between keys
       let curKeyNum = 0;
 
       // Set current key to most recent keyframe
@@ -180,35 +179,28 @@
       const nextKey = this.keys[curKeyNum + 1];
 
       // Create easing spline based on current and next key
-      const easeSpline = bezier(
+      const easingCurve = bezier(
         curKey.easeOut / 100,
         curKey.velocityOut / 100,
         1 - nextKey.easeIn / 100,
         1 - nextKey.velocityIn / 100,
       );
 
-      // Animation details
-      const v1 = curKey.value;
-      const v2 = nextKey.value;
-
-      const t1 = curKey.time;
-      const t2 = nextKey.time;
-
       // Delta calculations
-      const deltaV = v2 - v1;
-      const deltaT = t2 - t1;
+      const deltaV = nextKey.value - curKey.value;
+      const deltaT = nextKey.time - curKey.time;
 
       // Move animation to t1
-      const movedTime = Math.max(time - t1, 0);
+      const movedTime = Math.max(time - curKey.time, 0);
 
       // Map time to speed
       const timeInput = Math.min(1, movedTime / deltaT);
 
       // Get progress value according to spline
-      const prg = easeSpline(timeInput);
+      const progress = easingCurve(timeInput);
 
       // Animate between values according to progress amount
-      return v1 + deltaV * prg;
+      return curKey.value + deltaV * progress;
     };
   }
 }
