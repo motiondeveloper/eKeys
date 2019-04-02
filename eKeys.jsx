@@ -200,10 +200,7 @@
       const deltaT = t2 - t1;
 
       // Move animation to t1
-      let movedTime = time - t1;
-      if (movedTime <= 0) {
-        movedTime = 0;
-      }
+      const movedTime = Math.max(time - t1, 0);
 
       // Map time to speed
       const timeInput = Math.min(1, movedTime / deltaT);
