@@ -6,21 +6,24 @@ Its purpose is to speed up the creation of After Effects templates and other aut
 
 ## Contents
 
-- [Overview](#overview)
-  - [Contents](#contents)
-  - [Usage](#usage)
-  - [Example](#example)
-  - [To Do](#to-do)
-  - [License](#license)
-  - [Contact](#contact)
+- [Compatibility](#compatibility)
+- [Usage](#usage)
+- [Example](#example)
+- [To Do](#to-do)
+- [License](#license)
+- [Contact](#contact)
+
+## Compatibility
+
+This version of eKeys is compatible with After Effects versions >= 16.0.1 (CC2019) which uses the new [Javascript engine](https://helpx.adobe.com/after-effects/using/expression-language-reference.html).
+
+For a legacy version that works in the ExtendScript engine, view the [Extendscript Branch](https://github.com/motiondeveloper/ekeys/extendscript). Please note, this version of `eKeys` is not actively maintained.
 
 ## Usage
 
 1. **Download and import [`eKeys.jsx`](https://github.com/motiondeveloper/eKeys/raw/master/eKeys.jsx) into your After Effects project**
 
    This is the JSON file that contains the necessary code to run eKeys. You may not be able to drag and drop it into your project, in which case you will need to use the import dialog.
-
-   **Note:** eKeys is only compatible with After Effects versions >= 15.1.
 
 2. **Add a reference to the library in your expression**
 
