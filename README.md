@@ -27,7 +27,7 @@ Its purpose is to speed up the creation of After Effects templates and other aut
    To reference the library in an expression, you need to assign it to a variable. This is done via the line:
 
    ```javascript
-   var eKeys = footage("eKeys.jsx").sourceData;
+   const eKeys = footage("eKeys.jsx").sourceData;
    ```
 
 3. **Create an Animation Group**
@@ -35,7 +35,7 @@ Its purpose is to speed up the creation of After Effects templates and other aut
    Animation groups are collections of keyframes, and are created with the line:
 
    ```javascript
-   var animationGroupName = new eKeys.AnimGroup();
+   const animationGroupName = new eKeys.AnimGroup();
    ```
 
    You can create as many of these groups as you like, with separate keyframes in each group. This comes in handy when you need to toggle between different animations, while still having the ability to have them within the same expression.
@@ -60,10 +60,12 @@ Its purpose is to speed up the creation of After Effects templates and other aut
     The keyframe group animation is called via the line:
 
     ```javascript
-    animationGroupName.anim();
+    animationGroupName.anim(time);
     ````
 
-The main advantage is that every property of a keyframe (it's time, value and easing) is set via expressions. This means they can easily be controlled and linked to other properties, a must when doing any sort of template creation or automation within after effects.
+    - time: The time to animate according to, in seconds
+
+The main advantage is that every property of a keyframe (it's time, value and easing) is set via expressions. This means they can be controlled and linked to other properties, a must when doing any sort of template creation or automation within after effects.
 
 ## Example
 
@@ -71,24 +73,24 @@ An example setup of an animation group with a couple of keyframes:
 
 ```javascript
 // Import eKeys library
-var eKeys = footage("eKeys.jsx").sourceData;
+const eKeys = footage("eKeys.jsx").sourceData;
 
 // Create new animation group
-var animIn = new eKeys.AnimGroup();
+const animIn = new eKeys.AnimGroup();
 
 // Add keyframes to group
 animIn.add(1, 0, 33, 80);
 animIn.add(2, thisComp.width/2, 80, 33);
 
 // Animate animation group
-animIn.anim();
+animIn.anim(time);
 ```
 
 ## To Do
 
 - [x] ~~Add incoming and outgoing velocity inputs~~
 - [x] ~~Updated curve sampling to Newton-Raphson~~
-- [ ] Update to Javascript engine (from ExtendScript)
+- [x] ~~Update to Javascript engine (from ExtendScript)~~
 - [ ] Input validation and error checking
 - [ ] Add animation method input (overshoot, bounce etc)
 
