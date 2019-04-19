@@ -1,23 +1,45 @@
-# Overview
+<!-- Links -->
+[Back To Top ↑]: #ekeys
 
-eKeys is a system of doing animation in Adobe After effects entirely within expressions, with the same level on control as keyframes. It comes in the form of a JSON file that's imported into the project, and a set of expressions to be applied to each property you wish to animate, with the values for each "keyframe" to be added in the expression.
+<div align="center">
+
+# eKeys
+
+An After Effects animation engine built for expressions.
+
+**[Usage](#usage) | [Example](#example) | [Contact](#contact)**
+
+---
+
+</div>
+
+## Overview
+
+`eKeys` is a system of doing animation in Adobe After effects entirely within expressions, with the same level on control as keyframes.
+
+It comes in the form of a JSON file that's imported into the project, and a set of expressions to be applied to each property you wish to animate, with the values for each 'keyframe' to be added in the expression.
 
 Its purpose is to speed up the creation of After Effects templates and other automated work.
 
 ## Contents
 
-- [Compatibility](#compatibility)
-- [Usage](#usage)
-- [Example](#example)
-- [To Do](#to-do)
-- [License](#license)
-- [Contact](#contact)
+- [eKeys](#ekeys)
+  - [Overview](#overview)
+  - [Contents](#contents)
+  - [Compatibility](#compatibility)
+  - [Usage](#usage)
+  - [Example](#example)
+  - [To Do](#to-do)
+  - [License](#license)
+  - [Contact](#contact)
 
 ## Compatibility
 
 This version of eKeys is compatible with After Effects versions >= 16.0.1 (CC2019) which use the new [Javascript engine](https://helpx.adobe.com/after-effects/using/expression-language-reference.html).
 
 For a legacy version that works in the ExtendScript engine, view the [ExtendScript Branch](https://github.com/motiondeveloper/ekeys/tree/extendscript). Please note, this version of `eKeys` is not actively maintained.
+
+[Back To Top ↑]
 
 ## Usage
 
@@ -70,6 +92,8 @@ For a legacy version that works in the ExtendScript engine, view the [ExtendScri
 
 The main advantage is that every property of a keyframe (it's time, value and easing) is set via expressions. This means they can be controlled and linked to other properties, a must when doing any sort of template creation or automation within after effects.
 
+[Back To Top ↑]
+
 ## Example
 
 An example setup of an animation group with a couple of keyframes:
@@ -89,6 +113,8 @@ animIn.add(2, thisComp.width/2, 80, 33);
 animIn.anim(time);
 ```
 
+[Back To Top ↑]
+
 ## To Do
 
 - [x] ~~Add incoming and outgoing velocity inputs~~
@@ -97,12 +123,18 @@ animIn.anim(time);
 - [ ] Input validation and error checking
 - [ ] Add animation method input (overshoot, bounce etc)
 
+[Back To Top ↑]
+
 ## License
 
 This project is licensed under the terms of the GNU GPLv3 license. In summary:
 
 > Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.
 
+[Back To Top ↑]
+
 ## Contact
 
 Bugs, issues and feature requests can be submitted by filing an [issue](https://github.com/motiondeveloper/ekeys/issues) on Github. For everything else, feel free to reach out to [@modeveloper](https://twitter.com/modeveloper) on twitter.
+
+[Back To Top ↑]
