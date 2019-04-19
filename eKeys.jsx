@@ -17,7 +17,7 @@
       } else if (getType(expectedType) === 'array') {
         return expectedType.filter(type => argumentType === type);
       } else {
-        typeErrorMessage(expectedType, '')
+        typeErrorMessage(expectedType, 'string or array', getType(expectedType));
       }
     }
 
@@ -60,7 +60,7 @@
       velocityOut,
     ) {
       const argumentsArray = Array.prototype.slice.call(arguments, 0);
-      checkTypes(argumentsArray, ['number', 'number', 'number', 'number', 'number', 'number'])
+      checkTypes(argumentsArray, ['number', ['number', 'array'], 'number', 'number', 'number', 'number'])
       this.keys.push(
         new EKey(keyTime, value, easeIn, easeOut, velocityIn, velocityOut),
       );
