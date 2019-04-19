@@ -9,6 +9,9 @@ An After Effects animation engine built for expressions.
 
 **[Usage](#usage) | [Example](#example) | [Contact](#contact)**
 
+![eKeys Usage Video](docs/static/ekeys-preview.gif)
+`animGroup.add(keyTime, keyValue, easeIn, easeOut. velocityIn, velocityOut);`
+
 ---
 
 </div>
