@@ -1,6 +1,36 @@
 {
   'AnimGroup': function() {
-    // Version 2.1.2
+
+    // Type checking functions
+    const getType = (value) => {
+      return Object.prototype.toString.call(value)
+        .replace(/^\[object |\]$/g, '').toLowerCase();
+    };
+
+    const typeErrorMessage = (variableName, expectedType, receivedType) => {
+      throw new TypeError(`${variableName} must be of type ${expectedType}. Received ${receivedType}`);
+    }
+
+    const isValidType = (argumentType, expectedType) => {
+      if (getType(expectedType) === 'string') {
+        return argumentType === expectedType;
+      } else if (getType(expectedType) === 'array') {
+        return expectedType.filter(type => argumentType === type);
+      } else {
+        typeErrorMessage(expectedType, '')
+      }
+    }
+
+    const validateArgument = (argumentVariable, expectedType) => {
+      const argumentType = getType(argumentVariable);
+      return (isValidType(argumentType, expectedType)) ? true : typeErrorMessage(argumentVariable, expectedType, argumentType);
+    }
+
+    const checkTypes = (args, types) => {
+      types.map((type) => {
+        validateArgument(args[index], type);
+      });
+    }
 
     this.keys = [];
 
@@ -29,6 +59,8 @@
       velocityIn,
       velocityOut,
     ) {
+      const argumentsArray = Array.prototype.slice.call(arguments, 0);
+      checkTypes(argumentsArray, ['number', 'number', 'number', 'number', 'number', 'number'])
       this.keys.push(
         new EKey(keyTime, value, easeIn, easeOut, velocityIn, velocityOut),
       );
