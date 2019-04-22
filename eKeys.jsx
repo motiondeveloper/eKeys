@@ -60,7 +60,7 @@
       velocityOut,
     ) {
       const argumentsArray = Array.prototype.slice.call(arguments, 0);
-      checkTypes(argumentsArray, ['number', ['number', 'array'], 'number', 'number', 'number', 'number'])
+      checkTypes(argumentsArray, ['number', ['number', 'array'], 'number', 'number', 'number', 'number']);
       this.keys.push(
         new EKey(keyTime, value, easeIn, easeOut, velocityIn, velocityOut),
       );
