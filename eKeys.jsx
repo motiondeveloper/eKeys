@@ -36,12 +36,12 @@
 
     // Keyframe object constructor
     function EKey(
-      keyTime = 0,
-      keyValue = -9999,
-      easeIn = 33,
-      easeOut = 33,
-      velocityIn = 0,
-      velocityOut = 0,
+      keyTime,
+      keyValue,
+      easeIn,
+      easeOut,
+      velocityIn,
+      velocityOut,
     ) {
       this.time = keyTime;
       this.value = keyValue;
@@ -54,10 +54,10 @@
     this.add = function addKeyframe(
       keyTime,
       value,
-      easeIn,
-      easeOut,
-      velocityIn,
-      velocityOut,
+      easeIn = 33,
+      easeOut = 33,
+      velocityIn = 0,
+      velocityOut = 0,
     ) {
       const argumentsArray = Array.prototype.slice.call(arguments, 0);
       checkTypes(argumentsArray, ['number', ['number', 'array'], 'number', 'number', 'number', 'number']);
