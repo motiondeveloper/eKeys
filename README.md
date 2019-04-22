@@ -3,7 +3,7 @@
 
 <div align="center">
 
-# eKeys
+# eKeys <!-- omit in toc -->
 
 An After Effects animation engine built for expressions.
 
@@ -12,6 +12,10 @@ An After Effects animation engine built for expressions.
 ![eKeys Usage Video](docs/static/ekeys-preview.gif)
 
 `animGroup.add(keyTime, keyValue, easeIn, easeOut, velocityIn, velocityOut);`
+
+---
+
+### <a href="https://github.com/motiondeveloper/eKeys/raw/master/eKeys.jsx" download>✨ Download eKeys ✨</a><!-- omit in toc -->
 
 ---
 
@@ -27,15 +31,14 @@ Its purpose is to speed up the creation of After Effects templates and other aut
 
 ## Contents
 
-- [eKeys](#ekeys)
-  - [Overview](#overview)
-  - [Contents](#contents)
-  - [Compatibility](#compatibility)
-  - [Usage](#usage)
-  - [Example](#example)
-  - [To Do](#to-do)
-  - [License](#license)
-  - [Contact](#contact)
+- [Overview](#overview)
+- [Contents](#contents)
+- [Compatibility](#compatibility)
+- [Usage](#usage)
+- [Example](#example)
+- [To Do](#to-do)
+- [License](#license)
+- [Contact](#contact)
 
 ## Compatibility
 
@@ -47,7 +50,7 @@ For a legacy version that works in the ExtendScript engine, view the [ExtendScri
 
 ## Usage
 
-1. **Download and import [`eKeys.jsx`](https://github.com/motiondeveloper/eKeys/raw/master/eKeys.jsx) into your After Effects project**
+1. **Download and import <a href="https://github.com/motiondeveloper/eKeys/raw/master/eKeys.jsx" download> `eKeys.jsx`</a> into your After Effects project**
 
    This is the JSON file that contains the necessary code to run eKeys. You may not be able to drag and drop it into your project, in which case you will need to use the import dialog.
 
