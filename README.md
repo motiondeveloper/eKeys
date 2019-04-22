@@ -128,6 +128,7 @@ animIn.anim(time);
 - [x] ~~Updated curve sampling to Newton-Raphson~~
 - [x] ~~Update to Javascript engine (from ExtendScript)~~
 - [ ] Input validation and error checking
+- [ ] Add option to input easing as array, same as [css cubic-bezier](https://www.w3.org/TR/css-easing-1/).
 - [ ] Add animation method input (overshoot, bounce etc)
 
 [Back To Top ↑]
