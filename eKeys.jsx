@@ -177,17 +177,17 @@
       const lastKey = this.keys[lastKeyNum];
 
       // Check if time is outside of all keys
-      if (time <= this.keys[0].time) {
-        return this.keys[0].value;
+      if (time <= this.keys[0].keyTime) {
+        return this.keys[0].keyValue;
       }
-      if (time >= lastKey.time) {
-        return lastKey.value;
+      if (time >= lastKey.keyTime) {
+        return lastKey.keyValue;
       }
       // Otherwise animate between keys
       let curKeyNum = 0;
 
       // Set current key to most recent keyframe
-      while (curKeyNum < lastKeyNum && time >= this.keys[curKeyNum + 1].time) {
+      while (curKeyNum < lastKeyNum && time >= this.keys[curKeyNum + 1].keyTime) {
         curKeyNum++;
       }
 
@@ -203,10 +203,10 @@
       );
 
       // Delta calculations
-      const deltaT = nextKey.time - curKey.time;
+      const deltaT = nextKey.keyTime - curKey.keyTime;
       
       // Move animation to t1
-      const movedTime = Math.max(time - curKey.time, 0);
+      const movedTime = Math.max(time - curKey.keyTime, 0);
       
       // Map time to speed
       const timeInput = Math.min(1, movedTime / deltaT);
@@ -234,8 +234,8 @@
       }
 
       // Animate according to whether values are an array
-      const animateProps = [curKey.value, nextKey.value, progress];
-      return (Array.isArray(curKey.value) || Array.isArray(nextKey).value) ?
+      const animateProps = [curKey.keyValue, nextKey.keyValue, progress];
+      return (Array.isArray(curKey.keyValue) || Array.isArray(nextKey).keyValue) ?
         animateArrayFromProgress(...animateProps) :
         animateValueFromProgress(...animateProps);
     };
