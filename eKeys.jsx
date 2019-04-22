@@ -34,26 +34,9 @@
 
     this.keys = [];
 
-    // Keyframe object constructor
-    function EKey(
-      keyTime,
-      keyValue,
-      easeIn,
-      easeOut,
-      velocityIn,
-      velocityOut,
-    ) {
-      this.time = keyTime;
-      this.value = keyValue;
-      this.easeIn = easeIn;
-      this.easeOut = easeOut;
-      this.velocityIn = velocityIn;
-      this.velocityOut = velocityOut;
-    }
-
     this.add = function addKeyframe(
       keyTime,
-      value,
+      keyValue,
       easeIn = 33,
       easeOut = 33,
       velocityIn = 0,
@@ -62,7 +45,7 @@
       const argumentsArray = Array.prototype.slice.call(arguments, 0);
       checkTypes(argumentsArray, ['number', ['number', 'array'], 'number', 'number', 'number', 'number']);
       this.keys.push(
-        new EKey(keyTime, value, easeIn, easeOut, velocityIn, velocityOut),
+        {keyTime, keyValue, easeIn, easeOut, velocityIn, velocityOut},
       );
     };
 
