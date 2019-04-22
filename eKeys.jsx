@@ -27,7 +27,7 @@
     }
 
     const checkTypes = (args, types) => {
-      types.map((type) => {
+      types.map((type, index) => {
         validateArgument(args[index], type);
       });
     }
