@@ -15,7 +15,8 @@ An After Effects animation engine built for expressions.
 
 ---
 
-### <a href="https://github.com/motiondeveloper/eKeys/raw/master/eKeys.jsx" download>✨ Download eKeys ✨</a><!-- omit in toc -->
+### [✨ Download eKeys ✨](https://github.com/motiondeveloper/eKeys/raw/master/eKeys.jsx)<!-- omit in toc -->
+###### (Right click, save link as)
 
 ---
 
@@ -29,9 +30,18 @@ It comes in the form of a JSON file that's imported into the project, and a set 
 
 Its purpose is to speed up the creation of After Effects templates and other automated work.
 
+### Features
+
+- Animate between numbers or arrays
+- Full control over easing, including incoming and outgoing velocities
+- No installation necesary, only need to import 1 file
+- Simple and succinct expression interface
+- Free and open source
+
 ## Contents
 
 - [Overview](#overview)
+  - [Features](#features)
 - [Contents](#contents)
 - [Compatibility](#compatibility)
 - [Usage](#usage)
@@ -50,7 +60,7 @@ For a legacy version that works in the ExtendScript engine, view the [ExtendScri
 
 ## Usage
 
-1. **Download and import <a href="https://github.com/motiondeveloper/eKeys/raw/master/eKeys.jsx" download> `eKeys.jsx`</a> into your After Effects project**
+1. **Download and import [`eKeys.jsx`](https://github.com/motiondeveloper/eKeys/raw/master/eKeys.jsx) into your After Effects project**
 
    This is the JSON file that contains the necessary code to run eKeys. You may not be able to drag and drop it into your project, in which case you will need to use the import dialog.
 
@@ -138,6 +148,8 @@ animIn.anim(time);
 This project is licensed under the terms of the GNU GPLv3 license. In summary:
 
 > Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.
+
+The `bezier` function is from [Gaëtan Renaudeau's cubic-bezier](https://github.com/gre/bezier-easing) project, and is licensed under the terms of the MIT License.
 
 [Back To Top ↑]
 
