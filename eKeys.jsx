@@ -32,11 +32,15 @@
       });
     }
 
+    const requiredArgumentError = (variableName, functionName) => {
+      throw new Error(`${variableName} is required in ${functionName}`);
+    }
+
     this.keys = [];
 
     this.add = function addKeyframe(
-      keyTime,
-      keyValue,
+      keyTime = requiredArgumentError('Key time', 'keyframe inputs'),
+      keyValue = requiredArgumentError('Key value', 'keyframe inputs'),
       easeIn = 33,
       easeOut = 33,
       velocityIn = 0,
