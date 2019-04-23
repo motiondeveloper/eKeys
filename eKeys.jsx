@@ -21,14 +21,10 @@
       }
     }
 
-    const validateArgument = (argumentVariable, expectedType) => {
-      const argumentType = getType(argumentVariable);
-      return (isValidType(argumentType, expectedType)) ? true : typeErrorMessage(argumentVariable, expectedType, argumentType);
-    }
-
     const checkTypes = (args, types) => {
       types.map((type, index) => {
-        validateArgument(args[index], type);
+        const argumentType = getType(args[index]);
+        return (isValidType(argumentType, type)) ? true : typeErrorMessage(args[index], type, argumentType);
       });
     }
 
