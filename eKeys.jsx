@@ -1,15 +1,18 @@
 {
-  'AnimGroup': function() {
-
+  'AnimGroup' function() {
     // Type checking functions
-    const getType = (value) => {
-      return Object.prototype.toString.call(value)
-        .replace(/^\[object |\]$/g, '').toLowerCase();
+    const getType = value => {
+      return Object.prototype.toString
+        .call(value)
+        .replace(/^\[object |\]$/g, '')
+        .toLowerCase();
     };
 
     const typeErrorMessage = (variableName, expectedType, receivedType) => {
-      throw new TypeError(`${variableName} must be of type ${expectedType}. Received ${receivedType}`);
-    }
+      throw new TypeError(
+        `${variableName} must be of type ${expectedType}. Received ${receivedType}`
+      );
+    };
 
     const isValidType = (argumentType, expectedType) => {
       if (getType(expectedType) === 'string') {
@@ -19,18 +22,20 @@
       } else {
         typeErrorMessage(expectedType, 'string or array', getType(expectedType));
       }
-    }
+    };
 
     const checkTypes = (args, types) => {
       types.map((type, index) => {
         const argumentType = getType(args[index]);
-        return (isValidType(argumentType, type)) ? true : typeErrorMessage(args[index], type, argumentType);
+        return isValidType(argumentType, type)
+          ? true
+          : typeErrorMessage(args[index], type, argumentType);
       });
-    }
+    };
 
     const requiredArgumentError = (variableName, functionName) => {
       throw new Error(`${variableName} is required in ${functionName}`);
-    }
+    };
 
     this.keys = [];
 
@@ -40,13 +45,25 @@
       easeIn = 33,
       easeOut = 33,
       velocityIn = 0,
-      velocityOut = 0,
+      velocityOut = 0
     ) {
       const argumentsArray = Array.prototype.slice.call(arguments, 0);
-      checkTypes(argumentsArray, ['number', ['number', 'array'], 'number', 'number', 'number', 'number']);
-      this.keys.push(
-        {keyTime, keyValue, easeIn, easeOut, velocityIn, velocityOut},
-      );
+      checkTypes(argumentsArray, [
+        'number',
+        ['number', 'array'],
+        'number',
+        'number',
+        'number',
+        'number',
+      ]);
+      this.keys.push({
+        keyTime,
+        keyValue,
+        easeIn,
+        easeOut,
+        velocityIn,
+        velocityOut,
+      });
     };
 
     /**
@@ -71,10 +88,12 @@
     const C = aA1 => 3.0 * aA1;
 
     // Returns x(t) given t, x1, and x2, or y(t) given t, y1, and y2.
-    const calcBezier = (aT, aA1, aA2) => ((A(aA1, aA2) * aT + B(aA1, aA2)) * aT + C(aA1)) * aT;
+    const calcBezier = (aT, aA1, aA2) =>
+      ((A(aA1, aA2) * aT + B(aA1, aA2)) * aT + C(aA1)) * aT;
 
     // Returns dx/dt given t, x1, and x2, or dy/dt given t, y1, and y2.
-    const getSlope = (aT, aA1, aA2) => 3.0 * A(aA1, aA2) * aT * aT + 2.0 * B(aA1, aA2) * aT + C(aA1);
+    const getSlope = (aT, aA1, aA2) =>
+      3.0 * A(aA1, aA2) * aT * aT + 2.0 * B(aA1, aA2) * aT + C(aA1);
 
     const binarySubdivide = (aX, aA, aB, mX1, mX2) => {
       let currentX;
@@ -89,8 +108,8 @@
           aA = currentT;
         }
       } while (
-        Math.abs(currentX) > SUBDIVISION_PRECISION
-        && ++i < SUBDIVISION_MAX_ITERATIONS
+        Math.abs(currentX) > SUBDIVISION_PRECISION &&
+        ++i < SUBDIVISION_MAX_ITERATIONS
       );
       return currentT;
     };
@@ -126,7 +145,7 @@
         sampleValues[i] = calcBezier(i * kSampleStepSize, mX1, mX2);
       }
 
-      const getTForX = (aX) => {
+      const getTForX = aX => {
         let intervalStart = 0.0;
         let currentSample = 1;
         const lastSample = kSplineTableSize - 1;
@@ -141,8 +160,9 @@
         --currentSample;
 
         // Interpolate to provide an initial guess for t
-        const dist = (aX - sampleValues[currentSample])
-          / (sampleValues[currentSample + 1] - sampleValues[currentSample]);
+        const dist =
+          (aX - sampleValues[currentSample]) /
+          (sampleValues[currentSample + 1] - sampleValues[currentSample]);
         const guessForT = intervalStart + dist * kSampleStepSize;
         const initialSlope = getSlope(guessForT, mX1, mX2);
 
@@ -157,11 +177,11 @@
           intervalStart,
           intervalStart + kSampleStepSize,
           mX1,
-          mX2,
+          mX2
         );
       };
 
-      return bezierEasing = (x) => {
+      return (bezierEasing = x => {
         if (x === 0) {
           return 0;
         }
@@ -169,7 +189,7 @@
           return 1;
         }
         return calcBezier(getTForX(x), mY1, mY2);
-      };
+      });
     };
 
     this.anim = function animateBetweenKeys(time) {
@@ -199,21 +219,21 @@
         curKey.easeOut / 100,
         curKey.velocityOut / 100,
         1 - nextKey.easeIn / 100,
-        1 - nextKey.velocityIn / 100,
+        1 - nextKey.velocityIn / 100
       );
 
       // Delta calculations
       const deltaT = nextKey.keyTime - curKey.keyTime;
-      
+
       // Move animation to t1
       const movedTime = Math.max(time - curKey.keyTime, 0);
-      
+
       // Map time to speed
       const timeInput = Math.min(1, movedTime / deltaT);
-      
+
       // Get progress value according to spline
       const progress = easingCurve(timeInput);
-      
+
       // Performs animation on each element of array individually
       const animateArrayFromProgress = (startArray, endArray, progressAmount) => {
         // Array Subtraction
@@ -226,18 +246,18 @@
         return startArray.map((item, index) => {
           return item + deltaProgressed[index];
         });
-      }
+      };
       // Animate between values according to progress
       const animateValueFromProgress = (startVal, endVal, progressAmount) => {
         const valueDelta = endVal - startVal;
         return startVal + valueDelta * progressAmount;
-      }
+      };
 
       // Animate according to whether values are an array
       const animateProps = [curKey.keyValue, nextKey.keyValue, progress];
-      return (Array.isArray(curKey.keyValue) || Array.isArray(nextKey).keyValue) ?
-        animateArrayFromProgress(...animateProps) :
-        animateValueFromProgress(...animateProps);
+      return Array.isArray(curKey.keyValue) || Array.isArray(nextKey).keyValue
+        ? animateArrayFromProgress(...animateProps)
+        : animateValueFromProgress(...animateProps);
     };
   }
 }
