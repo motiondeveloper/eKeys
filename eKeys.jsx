@@ -1,5 +1,5 @@
 {
-  'AnimGroup' function() {
+  'AnimGroup': function() {
     // Type checking functions
     const getType = value => {
       return Object.prototype.toString
@@ -27,9 +27,9 @@
     const checkTypes = (args, types) => {
       types.map((type, index) => {
         const argumentType = getType(args[index]);
-        return isValidType(argumentType, type)
-          ? true
-          : typeErrorMessage(args[index], type, argumentType);
+        if (!isValidType(argumentType, type)) { 
+          typeErrorMessage(args[index], type, argumentType);
+        }
       });
     };
 
