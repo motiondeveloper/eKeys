@@ -192,7 +192,8 @@
       });
     };
 
-    this.anim = function animateBetweenKeys(time) {
+    this.anim = function animateBetweenKeys(time = requiredArgumentError('time', '.anim inputs')) {
+      checkTypes([time], ['number']);
       const lastKeyNum = this.keys.length - 1;
       const lastKey = this.keys[lastKeyNum];
 
