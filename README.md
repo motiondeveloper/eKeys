@@ -194,6 +194,63 @@ animIn.anim(time);
   </p>
   </details>
 
+- **Merge multiple keyframes groups**
+
+  Easily merge multiple keyframe arrays to be animated using the JavaScript [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax).
+
+    <details><summary>View Code</summary>
+  <p>
+
+  ```javascript
+  const inKeys;
+  const outKeys;
+  const animOut = true;
+  const keys = animOut ? [...inKeys] : [...inKeys, ...outKeys];
+  const animGroup = new eKeys.AnimGroup(keys);
+  animGroup.anim(time);
+  ```
+
+  </p>
+  </details>
+
+  This could also be done by creating multiple `AnimGroup's`.
+
+  <details><summary>View Code</summary>
+  <p>
+
+  ```javascript
+  const inKeys;
+  const outKeys;
+  const animOutEnabled = true;
+  const animIn = new eKeys.AnimGroup(inKeys);
+  const animOut = new eKeys.AnimGroup(outKeys);
+  
+  animIn.anim(time);
+  if (animOutEnabled) { animOut.anim(time) };
+  ```
+
+  </p>
+  </details>
+
+- **Remove specific keyframes**
+
+  Remove one or more keyframes based on another variable.
+
+  <details><summary>View Code</summary>
+    <p>
+
+    ```javascript
+    const keys;
+    const enableSpin = true;
+    if (!enableSpin) {
+      // Remove keyframes 4 and 5
+      keys.splice(3, 2);
+    }
+    ```
+
+    </p>
+    </details>
+
 [Back To Top ↑]
 
 ## By animators, for animators
