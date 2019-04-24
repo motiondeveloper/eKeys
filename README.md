@@ -266,7 +266,7 @@ Outside of this context, `eKeys` might not make much sense or appear a little st
 - [x] ~~Add incoming and outgoing velocity inputs~~
 - [x] ~~Updated curve sampling to Newton-Raphson~~
 - [x] ~~Update to Javascript engine (from ExtendScript)~~
-- [ ] Input validation and error checking [(in progress!)](https://github.com/motiondeveloper/eKeys/tree/input-validation)
+- [x] ~~Input validation and error checking~~
 - [ ] Add option to input easing as array, same as [css cubic-bezier](https://www.w3.org/TR/css-easing-1/).
 - [ ] Add animation method input (overshoot, bounce etc)
 - [ ] Add ability to write in standard js and transform into After Effects jsx using babel
