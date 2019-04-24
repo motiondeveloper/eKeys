@@ -184,7 +184,7 @@ const keys = [
     keyValue: [800, 50],
     ...keyDefaults,
   }
-]
+];
 ```
 
 ## By animators, for animators
