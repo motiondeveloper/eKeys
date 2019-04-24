@@ -18,7 +18,7 @@
       if (getType(expectedType) === 'string') {
         return argumentType === expectedType;
       } else if (getType(expectedType) === 'array') {
-        return expectedType.filter(type => argumentType === type);
+        return expectedType.filter(type => argumentType === type).length > 0;
       } else {
         typeErrorMessage(expectedType, 'string or array', getType(expectedType));
       }
@@ -33,15 +33,11 @@
       });
     };
 
-    const requiredArgumentError = (variableName, functionName) => {
-      throw new Error(`${variableName} is required in ${functionName}`);
-    };
-
     this.keys = [];
 
     this.add = function addKeyframe(
-      keyTime = requiredArgumentError('Key time', 'keyframe inputs'),
-      keyValue = requiredArgumentError('Key value', 'keyframe inputs'),
+      keyTime,
+      keyValue,
       easeIn = 33,
       easeOut = 33,
       velocityIn = 0,
@@ -51,10 +47,10 @@
       checkTypes(argumentsArray, [
         'number',
         ['number', 'array'],
-        'number',
-        'number',
-        'number',
-        'number',
+        ['number', 'undefined'],
+        ['number', 'undefined'],
+        ['number', 'undefined'],
+        ['number', 'undefined'],
       ]);
       this.keys.push({
         keyTime,
