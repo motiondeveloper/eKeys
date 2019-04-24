@@ -77,10 +77,10 @@ For a legacy version that works in the ExtendScript engine, view the [ExtendScri
 
 3. **Create an array of keyframes**
 
-   Each keyframe is represented as an object, with the following properties:
+    Each keyframe is represented as an object, with the following properties:
 
-   ```javascript
-   const keys = [
+    ```javascript
+    const keys = [
       {
         keyTime: 1,
         keyValue: [0, 0],
@@ -93,14 +93,16 @@ For a legacy version that works in the ExtendScript engine, view the [ExtendScri
         easeOut: 0,
       }
     ];
-   ```
+    ```
 
-   - keyTime: Where the keyframe is in time, in seconds
-   - keyValue: Value of the keyframe (can be number or array)
-   - easeIn: Ease in amount [0-100]
-   - easeOut: Ease out amount [0-100]
-   - (Optional) velocityIn: Incoming speed [0-100]
-   - (Optional) velocityOut: Outgoing speed [0-100]
+    - keyTime: Where the keyframe is in time, in seconds
+    - keyValue: Value of the keyframe (can be number or array)
+    - easeIn: Ease in amount [0-100]
+    - easeOut: Ease out amount [0-100]
+    - (Optional) velocityIn: Incoming speed [0-100]
+    - (Optional) velocityOut: Outgoing speed [0-100]
+
+    > While it is recommended you order the keyframes according to their `time` for the sake of readability, it is not required as they are sorted before the animation is calculated.
 
 4. **Create an Animation Group**
 
