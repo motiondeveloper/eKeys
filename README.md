@@ -1,5 +1,6 @@
 <!-- Links -->
-[Back To Top ↑]: #ekeys-
+
+[back to top ↑]: #ekeys-
 
 <div align="center">
 
@@ -16,6 +17,7 @@ An After Effects animation engine built for expressions.
 ---
 
 ### [✨ Download eKeys ✨](https://github.com/motiondeveloper/eKeys/raw/master/eKeys.jsx)<!-- omit in toc -->
+
 ###### (Right click, save link as)
 
 ---
@@ -70,7 +72,7 @@ For a legacy version that works in the ExtendScript engine, view the [ExtendScri
    To reference the library in an expression, you need to assign it to a variable. This is done via the line:
 
    ```javascript
-   const eKeys = footage("eKeys.jsx").sourceData;
+   const eKeys = footage('eKeys.jsx').sourceData;
    ```
 
 3. **Create an Animation Group**
@@ -88,7 +90,14 @@ For a legacy version that works in the ExtendScript engine, view the [ExtendScri
    Each eKey must be added to a specific animation group, with the syntax of:
 
    ```javascript
-   animationGroupName.add(keyTime, keyValue, easeIn, easeOut, velocityIn, velocityOut);
+   animationGroupName.add(
+     keyTime,
+     keyValue,
+     easeIn,
+     easeOut,
+     velocityIn,
+     velocityOut
+   );
    ```
 
    - keyTime: Where the keyframe is in time, in seconds
@@ -100,13 +109,13 @@ For a legacy version that works in the ExtendScript engine, view the [ExtendScri
 
 5. **Animate the keyframe group**
 
-    The keyframe group animation is called via the line:
+   The keyframe group animation is called via the line:
 
-    ```javascript
-    animationGroupName.anim(time);
-    ````
+   ```javascript
+   animationGroupName.anim(time);
+   ```
 
-    - time: The time to animate according to, in seconds
+   - time: The time to animate according to, in seconds
 
 The main advantage is that every property of a keyframe (it's time, value and easing) is set via expressions. This means they can be controlled and linked to other properties, a must when doing any sort of template creation or automation within after effects.
 
@@ -118,14 +127,14 @@ An example setup of an animation group with a couple of keyframes:
 
 ```javascript
 // Import eKeys library
-const eKeys = footage("eKeys.jsx").sourceData;
+const eKeys = footage('eKeys.jsx').sourceData;
 
 // Create new animation group
 const animIn = new eKeys.AnimGroup();
 
 // Add keyframes to group
 animIn.add(1, 0, 33, 80);
-animIn.add(2, thisComp.width/2, 80, 33);
+animIn.add(2, thisComp.width / 2, 80, 33);
 
 // Animate animation group
 animIn.anim(time);
