@@ -162,30 +162,38 @@ animIn.anim(time);
 
 ## Helpful Snippets
 
-### Create default keyframe parameters
+- **Create default keyframe parameters**
 
-Using the JavaScript [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) to use a set of default parameters across keyframes.
+  Use the JavaScript [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) to use a set of default parameters across keyframes.
 
-```javascript
-const keyDefaults = {
-  easeIn: 90,
-  easeOut: 50,
-  velocityIn: 10,
-  velocityOut: 50,
-};
+  <details><summary>View Code</summary>
+  <p>
 
-const keys = [
-  {
-    keyTime: 0,
-    keyValue: [0, 50],
-    ...keyDefaults,
-  },{
-    keyTime: 2,
-    keyValue: [800, 50],
-    ...keyDefaults,
-  }
-];
-```
+  ```javascript
+  const keyDefaults = {
+    easeIn: 90,
+    easeOut: 50,
+    velocityIn: 10,
+    velocityOut: 50,
+  };
+
+  const keys = [
+    {
+      keyTime: 0,
+      keyValue: [0, 50],
+      ...keyDefaults,
+    },{
+      keyTime: 2,
+      keyValue: [800, 50],
+      ...keyDefaults,
+    }
+  ];
+  ```
+
+  </p>
+  </details>
+
+
 
 ## By animators, for animators
 
