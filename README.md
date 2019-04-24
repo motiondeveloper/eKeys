@@ -137,7 +137,7 @@ animIn.anim(time);
 - [x] ~~Add incoming and outgoing velocity inputs~~
 - [x] ~~Updated curve sampling to Newton-Raphson~~
 - [x] ~~Update to Javascript engine (from ExtendScript)~~
-- [ ] Input validation and error checking
+- [ ] Input validation and error checking [(in progress!)](https://github.com/motiondeveloper/eKeys/tree/input-validation)
 - [ ] Add option to input easing as array, same as [css cubic-bezier](https://www.w3.org/TR/css-easing-1/).
 - [ ] Add animation method input (overshoot, bounce etc)
 
