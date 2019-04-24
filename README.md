@@ -46,6 +46,7 @@ Its purpose is to speed up the creation of After Effects templates and other aut
 - [Compatibility](#compatibility)
 - [Usage](#usage)
 - [Example](#example)
+- [By animators, for animators](#by-animators,-for-animators)
 - [To Do](#to-do)
 - [License](#license)
 - [Contact](#contact)
@@ -129,6 +130,14 @@ animIn.add(2, thisComp.width/2, 80, 33);
 // Animate animation group
 animIn.anim(time);
 ```
+
+[Back To Top ↑]
+
+## By animators, for animators
+
+`eKeys` is built in such a way to make it easy for animators to transition from the inputs and workflows they're used to when creating standard After Effects keyframes.
+
+Outside of this context, `eKeys` might not make much sense or appear a little strange. It's not for everyone!
 
 [Back To Top ↑]
 
