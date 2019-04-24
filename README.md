@@ -164,6 +164,8 @@ animIn.anim(time);
 
 ### Create default keyframe parameters
 
+Using the JavaScript [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) to use a set of default parameters across keyframes.
+
 ```javascript
 const keyDefaults = {
   easeIn: 90,
