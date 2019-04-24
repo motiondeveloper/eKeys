@@ -14,6 +14,10 @@
       );
     };
 
+    const requiredArgumentError = (variableName, functionName) => {
+      throw new Error(`${variableName} is required in ${functionName}`);
+    };
+
     const isValidType = (argumentType, expectedType) => {
       if (getType(expectedType) === 'string') {
         return argumentType === expectedType;
