@@ -48,6 +48,7 @@ Its purpose is to speed up the creation of After Effects templates and other aut
 - [Compatibility](#compatibility)
 - [Usage](#usage)
 - [Example](#example)
+- [Helpful Snippets](#helpful-snippets)
 - [By animators, for animators](#by-animators-for-animators)
 - [To Do](#to-do)
 - [License](#license)
@@ -193,7 +194,7 @@ animIn.anim(time);
   </p>
   </details>
 
-
+[Back To Top ↑]
 
 ## By animators, for animators
 
