@@ -135,7 +135,7 @@ animIn.anim(time);
 
 ## By animators, for animators
 
-`eKeys` is built in such a way to make it easy for animators to transition from the inputs and workflows they're used to when creating standard After Effects keyframes.
+`eKeys` is built in such a way to make it easy for animators to use, based on the inputs and workflows they're used to when creating standard After Effects keyframes.
 
 Outside of this context, `eKeys` might not make much sense or appear a little strange. It's not for everyone!
 
