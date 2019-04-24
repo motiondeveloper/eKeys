@@ -48,7 +48,7 @@ Its purpose is to speed up the creation of After Effects templates and other aut
 - [Compatibility](#compatibility)
 - [Usage](#usage)
 - [Example](#example)
-- [By animators, for animators](#by-animators,-for-animators)
+- [By animators, for animators](#by-animators-for-animators)
 - [To Do](#to-do)
 - [License](#license)
 - [Contact](#contact)
