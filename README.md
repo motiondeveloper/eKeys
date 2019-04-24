@@ -75,37 +75,42 @@ For a legacy version that works in the ExtendScript engine, view the [ExtendScri
    const eKeys = footage('eKeys.jsx').sourceData;
    ```
 
-3. **Create an Animation Group**
+3. **Create an array of keyframes**
 
-   Animation groups are collections of keyframes, and are created with the line:
-
-   ```javascript
-   const animationGroupName = new eKeys.AnimGroup();
-   ```
-
-   You can create as many of these groups as you like, with separate keyframes in each group. This comes in handy when you need to toggle between different animations, while still having the ability to have them within the same expression.
-
-4. **Add Keyframes to the Animation Group**
-
-   Each eKey must be added to a specific animation group, with the syntax of:
+   Each keyframe is represented as an object, with the following properties:
 
    ```javascript
-   animationGroupName.add(
-     keyTime,
-     keyValue,
-     easeIn,
-     easeOut,
-     velocityIn,
-     velocityOut
-   );
+   const keys = [
+      {
+        keyTime: 1,
+        keyValue: [0, 0],
+        easeIn: 0,
+        easeOut: 66,
+      },{
+        keyTime: 2,
+        keyValue: [thisComp.width / 2, 0],
+        easeIn: 90,
+        easeOut: 0,
+      }
+    ];
    ```
 
    - keyTime: Where the keyframe is in time, in seconds
-   - keyValue: Value of the keyframe (can be value or array)
+   - keyValue: Value of the keyframe (can be number or array)
    - easeIn: Ease in amount [0-100]
    - easeOut: Ease out amount [0-100]
    - (Optional) velocityIn: Incoming speed [0-100]
    - (Optional) velocityOut: Outgoing speed [0-100]
+
+4. **Create an Animation Group**
+
+   Animation groups are what animate between keyframes in an array:
+
+   ```javascript
+   const animationGroupName = new eKeys.AnimGroup(keys);
+   ```
+
+   You can create as many of these groups as you like, with separate keyframes in each group. This comes in handy when you need to toggle between different animations, while still having the ability to have them within the same expression.
 
 5. **Animate the keyframe group**
 
@@ -129,18 +134,54 @@ An example setup of an animation group with a couple of keyframes:
 // Import eKeys library
 const eKeys = footage('eKeys.jsx').sourceData;
 
-// Create new animation group
-const animIn = new eKeys.AnimGroup();
+// Create an array of keyframes
+const inKeys = [
+  {
+    keyTime: 1,
+    keyValue: 0,
+    easeIn: 0,
+    easeOut: 66,
+  },{
+    keyTime: 2,
+    keyValue: 250,
+    easeIn: 90,
+    easeOut: 0,
+  }
+];
 
-// Add keyframes to group
-animIn.add(1, 0, 33, 80);
-animIn.add(2, thisComp.width / 2, 80, 33);
+// Create new animation group
+const animIn = new eKeys.AnimGroup(inKeys);
 
 // Animate animation group
 animIn.anim(time);
 ```
 
 [Back To Top ↑]
+
+## Helpful Snippets
+
+### Create default keyframe parameters
+
+```javascript
+const keyDefaults = {
+  easeIn: 90,
+  easeOut: 50,
+  velocityIn: 10,
+  velocityOut: 50,
+};
+
+const keys = [
+  {
+    keyTime: 0,
+    keyValue: [0, 50],
+    ...keyDefaults,
+  },{
+    keyTime: 2,
+    keyValue: [800, 50],
+    ...keyDefaults,
+  }
+]
+```
 
 ## By animators, for animators
 
