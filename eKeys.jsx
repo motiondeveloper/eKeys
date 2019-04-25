@@ -1,5 +1,5 @@
 {
-  'AnimGroup': function(inputKeyframes) {
+  'AnimGroup': function(inputKeyframes = []) {
 
     // More reliable version of standard js typeof
     const getType = value => {
