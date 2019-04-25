@@ -1,6 +1,7 @@
 {
   'AnimGroup': function(keyframeArray) {
-    // Type checking functions
+
+    // More reliable version of standard js typeof
     const getType = value => {
       return Object.prototype.toString
         .call(value)
@@ -8,16 +9,20 @@
         .toLowerCase();
     };
 
+    // Error message template for an incorrect type
     const typeErrorMessage = (variableName, expectedType, receivedType) => {
       throw new TypeError(
         `${variableName} must be of type ${expectedType}. Received ${receivedType}`
       );
     };
 
+    // Error message template for missing required argument
     const requiredArgumentError = (variableName, functionName) => {
       throw new Error(`${variableName} is required in ${functionName}`);
     };
 
+    // Checks if a variable type matches the given expected type
+    // expected type can be array of types
     const isValidType = (argumentType, expectedType) => {
       if (getType(expectedType) === 'string') {
         return argumentType === expectedType;
@@ -28,6 +33,9 @@
       }
     };
 
+    // Loops through an array of the format [variable, 'expectedType']
+    // and checks if each variable is of the expected type and
+    // returns a TypeError if it's not
     const checkTypes = (checkingArray) => {
       checkingArray.map((check) => {
         const argumentType = getType(check[0]);
@@ -38,6 +46,8 @@
       });
     };
 
+    // Make sure that a given keyframe is valid
+    // Sets defaults and checks for errors
     const validateKeyframe = (key, index) => {
       // Set keyframe defaults
       let {
@@ -70,12 +80,10 @@
       }
     }
 
-
-    this.keys = [];
-    const validKeys = keys.map((key, index) => {
-      return validateKeyframe(key, index);
-    });
-    const validKeys = keyframeArray.sort((a, b) => a.time - b.time);
+    // Validate and sort the given keys
+    const validKeys = keys
+      .map((key, index) => validateKeyframe(key, index))
+      .sort((a, b) => a.time - b.time);
 
     /**
      * https://github.com/gre/bezier-easing
