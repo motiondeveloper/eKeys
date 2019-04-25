@@ -28,16 +28,54 @@
       }
     };
 
-    const checkTypes = (args, types) => {
-      types.map((type, index) => {
-        const argumentType = getType(args[index]);
-        if (!isValidType(argumentType, type)) { 
-          typeErrorMessage(args[index], type, argumentType);
+    const checkTypes = (checkingArray) => {
+      checkingArray.map((check) => {
+        const argumentType = getType(check[0]);
+        const expectedType = check[1];
+        if (!isValidType(argumentType, expectedType)) { 
+          typeErrorMessage(check[0], expectedType, argumentType);
         }
       });
     };
 
-    this.keys = keyframeArray.sort((a, b) => a.time - b.time);
+    const validateKeyframe = (key, index) => {
+      // Set keyframe defaults
+      let {
+        keyTime = requiredArgumentError('keyTime', `keyframe ${index}`),
+        keyValue = requiredArgumentError('keyValue', `keyframe ${index}`),
+        easeIn = 33,
+        easeOut = 33,
+        velocityIn = 0,
+        velocityOut = 0,
+      } = key;
+
+      // Check datatypes of keyframe parameters
+      checkTypes([
+        [keyTime, 'number'],
+        [keyValue, ['number', 'array']],
+        [easeIn, 'number'],
+        [easeOut, 'number'],
+        [velocityIn, 'number'],
+        [velocityOut, 'number']
+      ]);
+
+      // Return validated keyframe
+      return validKey = {
+        keyTime,
+        keyValue,
+        easeIn,
+        easeOut,
+        velocityIn,
+        velocityOut
+      }
+    }
+
+
+    this.keys = [];
+    const validKeys = keys.map((key, index) => {
+      return validateKeyframe(key, index);
+    });
+    const validKeys = keyframeArray.sort((a, b) => a.time - b.time);
 
     /**
      * https://github.com/gre/bezier-easing
