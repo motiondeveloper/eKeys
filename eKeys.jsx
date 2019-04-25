@@ -1,5 +1,5 @@
 {
-  'AnimGroup': function() {
+  'AnimGroup': function(keyframeArray) {
     // Type checking functions
     const getType = value => {
       return Object.prototype.toString
@@ -37,34 +37,7 @@
       });
     };
 
-    this.keys = [];
-
-    this.add = function addKeyframe(
-      keyTime,
-      keyValue,
-      easeIn = 33,
-      easeOut = 33,
-      velocityIn = 0,
-      velocityOut = 0
-    ) {
-      const argumentsArray = Array.prototype.slice.call(arguments, 0);
-      checkTypes(argumentsArray, [
-        'number',
-        ['number', 'array'],
-        ['number', 'undefined'],
-        ['number', 'undefined'],
-        ['number', 'undefined'],
-        ['number', 'undefined'],
-      ]);
-      this.keys.push({
-        keyTime,
-        keyValue,
-        easeIn,
-        easeOut,
-        velocityIn,
-        velocityOut,
-      });
-    };
+    this.keys = keyframeArray.sort((a, b) => a.time - b.time);
 
     /**
      * https://github.com/gre/bezier-easing
