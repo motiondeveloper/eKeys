@@ -1,16 +1,14 @@
 function AnimGroup(inputKeyframes = []) {
   // More reliable version of standard js typeof
-  const getType = value => {
-    return Object.prototype.toString
-      .call(value)
-      .replace(/^\[object |\]$/g, '')
-      .toLowerCase();
-  };
+  const getType = value => Object.prototype.toString
+    .call(value)
+    .replace(/^\[object |\]$/g, '')
+    .toLowerCase();
 
   // Error message template for an incorrect type
   const typeErrorMessage = (variableName, expectedType, receivedType) => {
     throw new TypeError(
-      `${variableName} must be of type ${expectedType}. Received ${receivedType}`
+      `${variableName} must be of type ${expectedType}. Received ${receivedType}`,
     );
   };
 
@@ -24,18 +22,17 @@ function AnimGroup(inputKeyframes = []) {
   const isValidType = (argumentType, expectedType) => {
     if (getType(expectedType) === 'string') {
       return argumentType === expectedType;
-    } else if (getType(expectedType) === 'array') {
+    } if (getType(expectedType) === 'array') {
       return expectedType.filter(type => argumentType === type).length > 0;
-    } else {
-      typeErrorMessage(expectedType, 'string or array', getType(expectedType));
     }
+    typeErrorMessage(expectedType, 'string or array', getType(expectedType));
   };
 
   // Loops through an array of the format [variable, 'expectedType']
   // and checks if each variable is of the expected type and
   // returns a TypeError if it's not
-  const checkTypes = checkingArray => {
-    checkingArray.map(check => {
+  const checkTypes = (checkingArray) => {
+    checkingArray.map((check) => {
       const argumentType = getType(check[0]);
       const expectedType = check[1];
       if (!isValidType(argumentType, expectedType)) {
@@ -48,7 +45,7 @@ function AnimGroup(inputKeyframes = []) {
   // Sets defaults and checks for errors
   const validateKeyframe = (key, index) => {
     // Set keyframe defaults
-    let {
+    const {
       keyTime = requiredArgumentError('keyTime', `keyframe ${index}`),
       keyValue = requiredArgumentError('keyValue', `keyframe ${index}`),
       easeIn = 33,
@@ -105,12 +102,10 @@ function AnimGroup(inputKeyframes = []) {
   const C = aA1 => 3.0 * aA1;
 
   // Returns x(t) given t, x1, and x2, or y(t) given t, y1, and y2.
-  const calcBezier = (aT, aA1, aA2) =>
-    ((A(aA1, aA2) * aT + B(aA1, aA2)) * aT + C(aA1)) * aT;
+  const calcBezier = (aT, aA1, aA2) => ((A(aA1, aA2) * aT + B(aA1, aA2)) * aT + C(aA1)) * aT;
 
   // Returns dx/dt given t, x1, and x2, or dy/dt given t, y1, and y2.
-  const getSlope = (aT, aA1, aA2) =>
-    3.0 * A(aA1, aA2) * aT * aT + 2.0 * B(aA1, aA2) * aT + C(aA1);
+  const getSlope = (aT, aA1, aA2) => 3.0 * A(aA1, aA2) * aT * aT + 2.0 * B(aA1, aA2) * aT + C(aA1);
 
   const binarySubdivide = (aX, aA, aB, mX1, mX2) => {
     let currentX;
@@ -125,8 +120,8 @@ function AnimGroup(inputKeyframes = []) {
         aA = currentT;
       }
     } while (
-      Math.abs(currentX) > SUBDIVISION_PRECISION &&
-      ++i < SUBDIVISION_MAX_ITERATIONS
+      Math.abs(currentX) > SUBDIVISION_PRECISION
+      && ++i < SUBDIVISION_MAX_ITERATIONS
     );
     return currentT;
   };
@@ -162,7 +157,7 @@ function AnimGroup(inputKeyframes = []) {
       sampleValues[i] = calcBezier(i * kSampleStepSize, mX1, mX2);
     }
 
-    const getTForX = aX => {
+    const getTForX = (aX) => {
       let intervalStart = 0.0;
       let currentSample = 1;
       const lastSample = kSplineTableSize - 1;
@@ -177,9 +172,8 @@ function AnimGroup(inputKeyframes = []) {
       --currentSample;
 
       // Interpolate to provide an initial guess for t
-      const dist =
-        (aX - sampleValues[currentSample]) /
-        (sampleValues[currentSample + 1] - sampleValues[currentSample]);
+      const dist = (aX - sampleValues[currentSample])
+        / (sampleValues[currentSample + 1] - sampleValues[currentSample]);
       const guessForT = intervalStart + dist * kSampleStepSize;
       const initialSlope = getSlope(guessForT, mX1, mX2);
 
@@ -194,11 +188,11 @@ function AnimGroup(inputKeyframes = []) {
         intervalStart,
         intervalStart + kSampleStepSize,
         mX1,
-        mX2
+        mX2,
       );
     };
 
-    return (bezierEasing = x => {
+    return (bezierEasing = (x) => {
       if (x === 0) {
         return 0;
       }
@@ -210,7 +204,7 @@ function AnimGroup(inputKeyframes = []) {
   };
 
   this.anim = function animateBetweenKeys(
-    time = requiredArgumentError('time', '.anim inputs')
+    time = requiredArgumentError('time', '.anim inputs'),
   ) {
     checkTypes([time], ['number']);
     const lastKeyNum = this.keys.length - 1;
@@ -239,7 +233,7 @@ function AnimGroup(inputKeyframes = []) {
       curKey.easeOut / 100,
       curKey.velocityOut / 100,
       1 - nextKey.easeIn / 100,
-      1 - nextKey.velocityIn / 100
+      1 - nextKey.velocityIn / 100,
     );
 
     // Delta calculations
@@ -257,15 +251,11 @@ function AnimGroup(inputKeyframes = []) {
     // Performs animation on each element of array individually
     const animateArrayFromProgress = (startArray, endArray, progressAmount) => {
       // Array Subtraction
-      const arrayDelta = endArray.map((item, index) => {
-        return item - startArray[index];
-      });
+      const arrayDelta = endArray.map((item, index) => item - startArray[index]);
       // Multiply difference by progress
       const deltaProgressed = arrayDelta.map(item => item * progressAmount);
       // Add to current key and return
-      return startArray.map((item, index) => {
-        return item + deltaProgressed[index];
-      });
+      return startArray.map((item, index) => item + deltaProgressed[index]);
     };
     // Animate between values according to progress
     const animateValueFromProgress = (startVal, endVal, progressAmount) => {
