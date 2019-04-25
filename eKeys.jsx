@@ -81,7 +81,7 @@
     }
 
     // Validate and sort the given keys
-    const keys = inputKeyframes
+    this.keys = inputKeyframes
       .map((key, index) => validateKeyframe(key, index))
       .sort((a, b) => a.time - b.time);
 
@@ -213,12 +213,12 @@
 
     this.anim = function animateBetweenKeys(time = requiredArgumentError('time', '.anim inputs')) {
       checkTypes([time], ['number']);
-      const lastKeyNum = keys.length - 1;
-      const lastKey = keys[lastKeyNum];
+      const lastKeyNum = this.keys.length - 1;
+      const lastKey = this.keys[lastKeyNum];
 
       // Check if time is outside of all keys
-      if (time <= keys[0].keyTime) {
-        return keys[0].keyValue;
+      if (time <= this.keys[0].keyTime) {
+        return this.keys[0].keyValue;
       }
       if (time >= lastKey.keyTime) {
         return lastKey.keyValue;
@@ -227,12 +227,12 @@
       let curKeyNum = 0;
 
       // Set current key to most recent keyframe
-      while (curKeyNum < lastKeyNum && time >= keys[curKeyNum + 1].keyTime) {
+      while (curKeyNum < lastKeyNum && time >= this.keys[curKeyNum + 1].keyTime) {
         curKeyNum++;
       }
 
-      const curKey = keys[curKeyNum];
-      const nextKey = keys[curKeyNum + 1];
+      const curKey = this.keys[curKeyNum];
+      const nextKey = this.keys[curKeyNum + 1];
 
       // Create easing spline based on current and next key
       const easingCurve = bezier(
