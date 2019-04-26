@@ -81,7 +81,7 @@
     // Validate and sort the given keys
     this.keys = inputKeyframes
       .map((key, index) => validateKeyframe(key, index))
-      .sort((a, b) => a.time - b.time);
+      .sort((a, b) => a.keyTime - b.keyTime);
 
     /**
      * https://github.com/gre/bezier-easing
