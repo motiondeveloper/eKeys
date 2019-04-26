@@ -55,14 +55,14 @@
         velocityOut = 0,
       } = key;
 
-      // Check datatypes of keyframe parameters
+      // Check data types of keyframe parameters
       checkTypes([
         [keyTime, 'number'],
         [keyValue, ['number', 'array']],
         [easeIn, 'number'],
         [easeOut, 'number'],
         [velocityIn, 'number'],
-        [velocityOut, 'number'],
+        [velocityOut, 'number']
       ]);
 
       // Return validated keyframe
