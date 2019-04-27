@@ -23,10 +23,11 @@
     const isValidType = (argumentType, expectedType) => {
       if (getType(expectedType) === 'string') {
         return argumentType === expectedType;
-      } if (getType(expectedType) === 'array') {
-        return expectedType.filter(type => argumentType === type).length > 0;
       }
-      return typeErrorMessage(expectedType, 'string or array', getType(expectedType));
+      if (getType(expectedType) === 'array') {
+        return expectedType.filter(type => argumentType === type).length > 0;
+      } 
+      return typeErrorMessage('expected type', 'string or array', getType(expectedType));
     };
 
     // Loops through an array of the format [variable, 'expectedType']
@@ -211,7 +212,7 @@
     this.anim = function animateBetweenKeys(
       time = requiredArgumentError('time', '.anim inputs'),
     ) {
-      checkTypes([time], ['number']);
+      checkTypes([[time, 'number']]);
       const lastKeyNum = this.keys.length - 1;
       const lastKey = this.keys[lastKeyNum];
 
