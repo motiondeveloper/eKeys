@@ -68,6 +68,8 @@ For a legacy version that works in the ExtendScript engine, view the [ExtendScri
 
 ### 1. **Download and import [`eKeys.jsx`](https://github.com/motiondeveloper/eKeys/raw/master/eKeys.jsx) into your After Effects project**
 
+(Right click, save link as).
+
 This is the JSON file that contains the necessary code to run eKeys. You may not be able to drag and drop it into your project, in which case you will need to use the import dialog.
 
 ### 2. **Add a reference to the library in your expression**
@@ -78,7 +80,7 @@ To reference the library in an expression, you need to assign it to a variable. 
 const eKeys = footage('eKeys.jsx').sourceData;
 ```
 
-> Since After Effects doesn't count footage items that are only referenced within expressions as used, it's recommended that you also place the `eKeys.jsx` file in any compositions where it is referenced.
+> ⚠️ Since After Effects doesn't count footage items that are only referenced within expressions as used, it's recommended that you also place the `eKeys.jsx` file in any compositions where it is referenced.
 >
 > This will ensure After Effects includes the file when collecting assets or packaging into a Motion Graphics Template.
 
@@ -250,23 +252,6 @@ animIn.anim(time);
   </details>
 
   This could also be done by creating multiple `AnimGroup's`.
-
-  <details><summary>View Code</summary>
-  <p>
-
-  ```javascript
-  const inKeys;
-  const outKeys;
-  const animOutEnabled = true;
-  const animIn = new eKeys.AnimGroup(inKeys);
-  const animOut = new eKeys.AnimGroup(outKeys);
-  
-  animIn.anim(time);
-  if (animOutEnabled) { animOut.anim(time) };
-  ```
-
-  </p>
-  </details>
 
 - **Remove specific keyframes**
 
