@@ -66,88 +66,102 @@ For a legacy version that works in the ExtendScript engine, view the [ExtendScri
 
 ## Usage
 
-1. **Download and import [`eKeys.jsx`](https://github.com/motiondeveloper/eKeys/raw/master/eKeys.jsx) into your After Effects project**
+### 1. **Download and import [`eKeys.jsx`](https://github.com/motiondeveloper/eKeys/raw/master/eKeys.jsx) into your After Effects project**
 
-   This is the JSON file that contains the necessary code to run eKeys. You may not be able to drag and drop it into your project, in which case you will need to use the import dialog.
+This is the JSON file that contains the necessary code to run eKeys. You may not be able to drag and drop it into your project, in which case you will need to use the import dialog.
 
-2. **Add a reference to the library in your expression**
+### 2. **Add a reference to the library in your expression**
 
-   To reference the library in an expression, you need to assign it to a variable. This is done via the line:
+To reference the library in an expression, you need to assign it to a variable. This is done via the line:
 
-   ```javascript
-   const eKeys = footage('eKeys.jsx').sourceData;
-   ```
+```javascript
+const eKeys = footage('eKeys.jsx').sourceData;
+```
 
-3. **Create an array of keyframes**
+> Since After Effects doesn't count footage items that are only referenced within expressions as used, it's recommended that you also place the `eKeys.jsx` file in any compositions where it is referenced.
+>
+> This will ensure After Effects includes the file when collecting assets or packaging into a Motion Graphics Template.
 
-    Each keyframe is represented as an object, with the following properties:
+### 3. **Create an array of keyframes**
 
-    ```javascript
-    const keys = [
-      {
-        keyTime: 1,
-        keyValue: [0, 0],
-        easeIn: 0,
-        easeOut: 66,
-      },{
-        keyTime: 2,
-        keyValue: [thisComp.width / 2, 0],
-        easeIn: 90,
-        easeOut: 0,
-      }
-    ];
-    ```
+Each keyframe is represented as an object within an array.
 
-    - `keyTime` Where the keyframe is in time, in seconds
-      - Type: `number`
-      - Required: `true`
-    - `keyValue` Value of the keyframe
-      - Type: `number` or `array`
-      - Required: `true`
-    - `easeIn` Ease in amount
-      - Type: `number`
-      - Required: `false`
-      - Default: `33`
-      - Range: `0-100`
-    - `easeOut` Ease out amount
-      - Type: `number`
-      - Required: `false`
-      - Default: `33`
-      - Range: `0-100`
-    - `velocityIn` Incoming speed
-      - Type: `number`
-      - Required: `false`
-      - Default: `0`
-      - Range: `0-100`
-    - `velocityOut` Outgoing speed
-      - Type: `number`
-      - Required: `false`
-      - Default: `0`
-      - Range: `0-100`
+```javascript
+// Example keyframe array
+const keys = [
+  {
+    keyTime: 1,
+    keyValue: [0, 0],
+    easeIn: 0,
+    easeOut: 66,
+  },{
+    keyTime: 2,
+    keyValue: [thisComp.width / 2, 0],
+    easeIn: 90,
+    easeOut: 0,
+  }
+];
+```
 
-  > While it is recommended you order the keyframes according to their `keyTime` for the sake of readability, it is not required as they are sorted before the animation is calculated.
+#### Keyframe Object Properties
 
-4. **Create an Animation Group**
+- `keyTime` Where the keyframe is in time, in seconds
+  - Type: `number`
+  - Required: `true`
+- `keyValue` Value of the keyframe
+  - Type: `number` or `array`
+  - Required: `true`
+- `easeIn` Ease in amount
+  - Type: `number`
+  - Required: `false`
+  - Default: `33`
+  - Range: `0-100`
+- `easeOut` Ease out amount
+  - Type: `number`
+  - Required: `false`
+  - Default: `33`
+  - Range: `0-100`
+- `velocityIn` Incoming speed
+  - Type: `number`
+  - Required: `false`
+  - Default: `0`
+  - Range: `0-100`
+- `velocityOut` Outgoing speed
+  - Type: `number`
+  - Required: `false`
+  - Default: `0`
+  - Range: `0-100`
 
-   Animation groups are what animate between keyframes in an array:
+> While it is recommended you order the keyframes according to their `keyTime` for the sake of readability, it is not required as they are sorted before the animation is calculated.
 
-   ```javascript
-   const animationGroupName = new eKeys.AnimGroup(keys);
-   ```
+### 4. **Create an Animation Group**
 
-   You can create as many of these groups as you like, with separate keyframes in each group. This comes in handy when you need to toggle between different animations, while still having the ability to have them within the same expression.
+Animation groups are what animate between keyframes in an array:
 
-5. **Animate the keyframe group**
+```javascript
+const animationGroupName = new eKeys.AnimGroup(keys);
+```
 
-   The keyframe group animation is called via the line:
+#### Animation Group Inputs
 
-   ```javascript
-   animationGroupName.anim(time);
-   ```
+- `keys` Array of keyframes
+  - Type: `array`
+  - Required: `true`
 
-   - time: The time to animate according to, in seconds
+You can create as many of these groups as you like, with separate keyframes in each group. This comes in handy when you need to toggle between different animations, while still having the ability to have them within the same expression.
 
-The main advantage is that every property of a keyframe (it's time, value and easing) is set via expressions. This means they can be controlled and linked to other properties, a must when doing any sort of template creation or automation within after effects.
+### 5. **Animate the keyframe group**
+
+The final animated value can be returned by call the `.anim()` function of a `AnimGroup`
+
+```javascript
+animationGroupName.anim(time);
+```
+#### `.anim()` Function Inputs
+
+- `time` Incrementing animation time
+  - Type: `number`
+  - Required: `true`
 
 [Back To Top ↑]
 
