@@ -14,7 +14,7 @@ An After Effects animation engine built for expressions.
 
 ```
 const keys = [{keyTime: 0, keyValue: [0, 100], easeIn: 0, easeOut: 90}]
-````
+```
 
 ---
 
@@ -98,14 +98,34 @@ For a legacy version that works in the ExtendScript engine, view the [ExtendScri
     ];
     ```
 
-    - keyTime: Where the keyframe is in time, in seconds
-    - keyValue: Value of the keyframe (can be number or array)
-    - easeIn: Ease in amount [0-100]
-    - easeOut: Ease out amount [0-100]
-    - (Optional) velocityIn: Incoming speed [0-100]
-    - (Optional) velocityOut: Outgoing speed [0-100]
+    - `keyTime` Where the keyframe is in time, in seconds
+      - Type: `number`
+      - Required: `true`
+    - `keyValue` Value of the keyframe
+      - Type: `number` or `array`
+      - Required: `true`
+    - `easeIn` Ease in amount
+      - Type: `number`
+      - Required: `false`
+      - Default: `33`
+      - Range: `0-100`
+    - `easeOut` Ease out amount
+      - Type: `number`
+      - Required: `false`
+      - Default: `33`
+      - Range: `0-100`
+    - `velocityIn` Incoming speed
+      - Type: `number`
+      - Required: `false`
+      - Default: `0`
+      - Range: `0-100`
+    - `velocityOut` Outgoing speed
+      - Type: `number`
+      - Required: `false`
+      - Default: `0`
+      - Range: `0-100`
 
-    > While it is recommended you order the keyframes according to their `time` for the sake of readability, it is not required as they are sorted before the animation is calculated.
+  > While it is recommended you order the keyframes according to their `keyTime` for the sake of readability, it is not required as they are sorted before the animation is calculated.
 
 4. **Create an Animation Group**
 
