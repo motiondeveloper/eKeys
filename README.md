@@ -12,7 +12,9 @@ An After Effects animation engine built for expressions.
 
 ![eKeys Usage Video](docs/static/ekeys-preview.gif)
 
-`animGroup.add(keyTime, keyValue, easeIn, easeOut, velocityIn, velocityOut);`
+```
+const keys = [{keyTime: 0, keyValue: [0, 100], easeIn: 0, easeOut: 90}]
+````
 
 ---
 
