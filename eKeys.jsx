@@ -235,6 +235,10 @@
       const curKey = this.keys[curKeyNum];
       const nextKey = this.keys[curKeyNum + 1];
 
+      // Check to see if no animation is
+      // required between current keys
+      if (curKey.value === nextKey.value) { return curKey.value; }
+
       // Create easing spline based on current and next key
       const easingCurve = bezier(
         curKey.easeOut / 100,
