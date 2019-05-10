@@ -144,6 +144,8 @@
 
     const LinearEasing = x => x;
 
+    // Creates bezier curve and returns function
+    // to calculate eased value
     const bezier = (mX1, mY1, mX2, mY2) => {
       if (!(mX1 >= 0 && mX1 <= 1 && mX2 >= 0 && mX2 <= 1)) {
         throw new Error('bezier x values must be in [0, 1] range');
