@@ -209,6 +209,7 @@
       return bezierEasing;
     };
 
+    // Returns the final animated value
     this.anim = function animateBetweenKeys(
       time = requiredArgumentError('time', '.anim inputs'),
     ) {
@@ -216,17 +217,17 @@
       const lastKeyNum = this.keys.length - 1;
       const lastKey = this.keys[lastKeyNum];
 
-      // Check if time is outside of all keys
+      // If outside of all keys, return closest
+      // key value, skip animation
       if (time <= this.keys[0].keyTime) {
         return this.keys[0].keyValue;
       }
       if (time >= lastKey.keyTime) {
         return lastKey.keyValue;
       }
-      // Otherwise animate between keys
-      let curKeyNum = 0;
-
+      
       // Set current key to most recent keyframe
+      let curKeyNum = 0;
       while (curKeyNum < lastKeyNum && time >= this.keys[curKeyNum + 1].keyTime) {
         curKeyNum++;
       }
@@ -245,13 +246,15 @@
       // Delta calculations
       const deltaT = nextKey.keyTime - curKey.keyTime;
 
-      // Move animation to t1
+      // Create incrementing time value that is zero
+      // at start keyframe time
       const movedTime = Math.max(time - curKey.keyTime, 0);
 
-      // Map time to speed
+      // Normalize time input to maximum of one
+      // and to correct speed
       const timeInput = Math.min(1, movedTime / deltaT);
 
-      // Get progress value according to spline
+      // Get progress value according to easing spline
       const progress = easingCurve(timeInput);
 
       // Performs animation on each element of array individually
@@ -269,7 +272,7 @@
         return startVal + valueDelta * progressAmount;
       };
 
-      // Animate according to whether values are an array
+      // Return animation according to whether values are an array
       const animateProps = [curKey.keyValue, nextKey.keyValue, progress];
       return Array.isArray(curKey.keyValue) || Array.isArray(nextKey).keyValue
         ? animateArrayFromProgress(...animateProps)
