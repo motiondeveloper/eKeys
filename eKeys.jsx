@@ -280,7 +280,7 @@
 
       // Return animation according to whether values are an array
       const animateProps = [curKey.keyValue, nextKey.keyValue, progress];
-      return Array.isArray(curKey.keyValue) || Array.isArray(nextKey).keyValue
+      return Array.isArray(curKey.keyValue) || Array.isArray(nextKey.keyValue)
         ? animateArrayFromProgress(...animateProps)
         : animateValueFromProgress(...animateProps);
     }
