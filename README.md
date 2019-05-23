@@ -12,7 +12,7 @@ An After Effects animation engine built for expressions.
 
 ![eKeys Usage Video](docs/static/ekeys-preview.gif)
 
-```
+```javascript
 const keys = [{keyTime: 0, keyValue: [0, 100], easeIn: 0, easeOut: 90}]
 ```
 
