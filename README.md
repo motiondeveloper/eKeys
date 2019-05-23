@@ -141,7 +141,7 @@ const keys = [
 Animation groups are what animate between keyframes in an array:
 
 ```javascript
-const animationGroupName = new eKeys.AnimGroup(keys);
+const animationGroupName = eKeys.AnimGroup(keys);
 ```
 
 #### Animation Group Inputs
@@ -191,7 +191,7 @@ const inKeys = [
 ];
 
 // Create new animation group
-const animIn = new eKeys.AnimGroup(inKeys);
+const animIn = eKeys.AnimGroup(inKeys);
 
 // Animate animation group
 animIn.anim(time);
@@ -244,7 +244,7 @@ animIn.anim(time);
   const outKeys;
   const animOut = true;
   const keys = animOut ? [...inKeys] : [...inKeys, ...outKeys];
-  const animGroup = new eKeys.AnimGroup(keys);
+  const animGroup = eKeys.AnimGroup(keys);
   animGroup.anim(time);
   ```
 
