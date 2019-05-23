@@ -80,7 +80,7 @@
     };
 
     // Validate and sort the given keys
-    this.keys = inputKeyframes
+    const keys = inputKeyframes
       .map((key, index) => validateKeyframe(key, index))
       .sort((a, b) => a.keyTime - b.keyTime);
 
@@ -212,17 +212,15 @@
     };
 
     // Returns the final animated value
-    this.anim = function animateBetweenKeys(
-      time = requiredArgumentError('time', '.anim inputs'),
-    ) {
+    const animateKeys = function(time = requiredArgumentError('time', '.anim inputs')) {
       checkTypes([[time, 'number']]);
-      const lastKeyNum = this.keys.length - 1;
-      const lastKey = this.keys[lastKeyNum];
+      const lastKeyNum = keys.length - 1;
+      const lastKey = keys[lastKeyNum];
 
       // If outside of all keys, return closest
       // key value, skip animation
-      if (time <= this.keys[0].keyTime) {
-        return this.keys[0].keyValue;
+      if (time <= keys[0].keyTime) {
+        return keys[0].keyValue;
       }
       if (time >= lastKey.keyTime) {
         return lastKey.keyValue;
@@ -230,12 +228,12 @@
       
       // Set current key to most recent keyframe
       let curKeyNum = 0;
-      while (curKeyNum < lastKeyNum && time >= this.keys[curKeyNum + 1].keyTime) {
+      while (curKeyNum < lastKeyNum && time >= keys[curKeyNum + 1].keyTime) {
         curKeyNum++;
       }
 
-      const curKey = this.keys[curKeyNum];
-      const nextKey = this.keys[curKeyNum + 1];
+      const curKey = keys[curKeyNum];
+      const nextKey = keys[curKeyNum + 1];
 
       // Check to see if no animation is
       // required between current keys
@@ -284,5 +282,11 @@
         ? animateArrayFromProgress(...animateProps)
         : animateValueFromProgress(...animateProps);
     }
+
+    const publicAPI = {
+      anim: animateKeys,
+    }
+
+    return publicAPI;
   }
 }
