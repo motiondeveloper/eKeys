@@ -211,7 +211,7 @@
         }
         return calcBezier(getTForX(x), mY1, mY2);
       };
-
+      
       return bezierEasing;
     };
 
@@ -243,8 +243,8 @@
 
       // Check to see if no animation is
       // required between current keys
-      if (curKey.value === nextKey.value) {
-        return curKey.value;
+      if (curKey.keyValue === nextKey.keyValue) {
+        return curKey.keyValue;
       }
 
       // Create easing spline based on current and next key
