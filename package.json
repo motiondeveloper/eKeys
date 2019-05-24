@@ -24,6 +24,8 @@
   "homepage": "https://github.com/motiondeveloper/eKeys#readme",
   "devDependencies": {
     "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.2",
     "prettier": "^1.16.4"
   }
 }
