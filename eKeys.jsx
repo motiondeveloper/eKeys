@@ -273,7 +273,7 @@
       const animateArrayFromProgress = (startArray, endArray, progressAmount) => {
         // Array Subtraction
         const arrayDelta = endArray.map(
-          (item, index) => item - startArray[index],
+          (item, index) => item - startArray[index]
         );
         // Multiply difference by progress
         const deltaProgressed = arrayDelta.map(item => item * progressAmount);
