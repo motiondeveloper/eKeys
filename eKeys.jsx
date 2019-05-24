@@ -293,10 +293,6 @@
         : animateValueFromProgress(...animateProps);
     };
 
-    const publicAPI = {
-      anim: animateBetweenKeys,
-    };
-
-    return publicAPI;
+    return animateBetweenKeys;
   }
 }
