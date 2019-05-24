@@ -154,12 +154,12 @@ You can create as many of these groups as you like, with separate keyframes in e
 
 ### 5. **Animate the keyframe group**
 
-The final animated value can be returned by call the `.anim()` function of a `AnimGroup`
+The final animated value can be returned by calling the animGroup function.
 
 ```javascript
-animationGroupName.anim(time);
+animationGroupName(time);
 ```
-#### `.anim()` Function Inputs
+#### `animationGroup()` Function Inputs
 
 - `time` Incrementing animation time
   - Type: `number`
@@ -194,7 +194,7 @@ const inKeys = [
 const animIn = eKeys.AnimGroup(inKeys);
 
 // Animate animation group
-animIn.anim(time);
+animIn(time);
 ```
 
 [Back To Top ↑]
@@ -245,7 +245,7 @@ animIn.anim(time);
   const animOut = true;
   const keys = animOut ? [...inKeys] : [...inKeys, ...outKeys];
   const animGroup = eKeys.AnimGroup(keys);
-  animGroup.anim(time);
+  animGroup(time);
   ```
 
   </p>
