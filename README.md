@@ -105,7 +105,8 @@ const keys = [
 ];
 ```
 
-#### Keyframe Object Properties
+<details><summary><strong>Keyframe Object Properties</strong></summary>
+<br>
 
 - `keyTime` Where the keyframe is in time, in seconds
   - Type: `number`
@@ -133,6 +134,8 @@ const keys = [
   - Required: `false`
   - Default: `0`
   - Range: `0-100`
+</details>
+<br>
 
 > While it is recommended you order the keyframes according to their `keyTime` for the sake of readability, it is not required as they are sorted before the animation is calculated.
 
