@@ -20,8 +20,6 @@ const keys = [{keyTime: 0, keyValue: [0, 100], easeIn: 0, easeOut: 90}]
 
 ### [✨ Download eKeys ✨](https://github.com/motiondeveloper/eKeys/releases)<!-- omit in toc -->
 
-###### (Right click, save link as)
-
 ---
 
 </div>
