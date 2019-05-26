@@ -10,7 +10,7 @@ An After Effects animation engine built for expressions.
 
 **[Usage](#usage) | [Example](#example) | [Contact](#contact)**
 
-![eKeys Usage Video](docs/static/ekeys-preview.gif)
+![eKeys Usage Video](docs/static/ekeys-preview.jpg)
 
 ```javascript
 const keys = [{keyTime: 0, keyValue: [0, 100], easeIn: 0, easeOut: 90}]
