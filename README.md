@@ -18,7 +18,7 @@ const keys = [{keyTime: 0, keyValue: [0, 100], easeIn: 0, easeOut: 90}]
 
 ---
 
-### [✨ Download eKeys ✨](https://github.com/motiondeveloper/eKeys/raw/master/eKeys.jsx)<!-- omit in toc -->
+### [✨ Download eKeys ✨](https://github.com/motiondeveloper/eKeys/releases)<!-- omit in toc -->
 
 ###### (Right click, save link as)
 
@@ -38,7 +38,7 @@ Its purpose is to speed up the creation of After Effects templates and other aut
 
 - Animate between numbers or arrays
 - Full control over easing, including incoming and outgoing velocities
-- No installation necesary, only need to import 1 file
+- No installation necessary, just import 1 file
 - Simple and succinct expression interface
 - Free and open source
 
@@ -66,9 +66,9 @@ For a legacy version that works in the ExtendScript engine, view the [ExtendScri
 
 ## Usage
 
-### 1. **Download and import [`eKeys.jsx`](https://github.com/motiondeveloper/eKeys/raw/master/eKeys.jsx) into your After Effects project**
+### 1. **Download and import `eKeys.jsx` into your After Effects project**
 
-(Right click, save link as).
+Head over to the [releases](https://github.com/motiondeveloper/eKeys/releases) page to download the latest version of the `eKeys.jsx` file.
 
 This is the JSON file that contains the necessary code to run eKeys. You may not be able to drag and drop it into your project, in which case you will need to use the import dialog.
 
