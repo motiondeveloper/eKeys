@@ -1,5 +1,8 @@
 {
-  'AnimGroup': function(inputKeyframes = []) {
+  'animate': function(
+    inputKeyframes = requiredArgumentError('Keyframe Array', '.animate() inputs'),
+    inputTime = requiredArgumentError('Input Time', '.animate() inputs')
+  ) {
     // More reliable version of standard js typeof
     const getType = value => Object.prototype.toString
       .call(value)
@@ -84,9 +87,12 @@
     };
 
     // Validate and sort the given keys
-    const keys = inputKeyframes
+    const validKeys = inputKeyframes
       .map((key, index) => validateKeyframe(key, index))
       .sort((a, b) => a.keyTime - b.keyTime);
+
+    // Validate time input
+    checkTypes([[inputTime, 'number']]);
 
     // These values are established by empiricism with tests (tradeoff: performance VS precision)
     const NEWTON_ITERATIONS = 4;
@@ -216,28 +222,32 @@
     };
 
     // Returns the final animated value
-    const animateBetweenKeys = function (
-      time = requiredArgumentError('time', '.anim inputs'),
-    ) {
-      checkTypes([[time, 'number']]);
-      const lastKeyNum = keys.length - 1;
-      const lastKey = keys[lastKeyNum];
+    const animateBetweenKeys = function(keys, time) {
+
+      function getCurrentKeyNum(keys, time) {
+        const lastKeyNum = keys.length - 1;
+
+        // Set current key to most recent keyframe
+        let curKeyNum = 0;
+        while (curKeyNum < lastKeyNum && time >= keys[curKeyNum + 1].keyTime) {
+          curKeyNum++;
+        }
+        return curKeyNum;
+      }
+
+      const lastKey = keys[keys.length - 1];
+      const firstKey = keys[0];
 
       // If outside of all keys, return closest
       // key value, skip animation
-      if (time <= keys[0].keyTime) {
-        return keys[0].keyValue;
+      if (time <= firstKey.keyTime) {
+        return firstKey.keyValue;
       }
       if (time >= lastKey.keyTime) {
         return lastKey.keyValue;
       }
 
-      // Set current key to most recent keyframe
-      let curKeyNum = 0;
-      while (curKeyNum < lastKeyNum && time >= keys[curKeyNum + 1].keyTime) {
-        curKeyNum++;
-      }
-
+      const curKeyNum = getCurrentKeyNum(keys, time);
       const curKey = keys[curKeyNum];
       const nextKey = keys[curKeyNum + 1];
 
@@ -293,6 +303,6 @@
         : animateValueFromProgress(...animateProps);
     };
 
-    return animateBetweenKeys;
+    return animateBetweenKeys(validKeys, inputTime);
   }
 }
