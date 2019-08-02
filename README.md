@@ -133,31 +133,18 @@ const keys = [
 
 > While it is recommended you order the keyframes according to their `keyTime` for the sake of readability, it is not required as they are sorted before the animation is calculated.
 
-### 4. **Create an Animation Group**
+### 4. **Animate between the keys**
 
-Animation groups are what animate between keyframes in an array:
+The final animated value can be returned by calling the `animate` function.
 
 ```javascript
-const animationGroupName = eKeys.AnimGroup(keys);
+eKeys.animate(keys, time);
 ```
-
-#### Animation Group Inputs
+#### `animate()` Function Inputs
 
 - `keys` Array of keyframes
   - Type: `array`
   - Required: `true`
-
-You can create as many of these groups as you like, with separate keyframes in each group. This comes in handy when you need to toggle between different animations, while still having the ability to have them within the same expression.
-
-### 5. **Animate the keyframe group**
-
-The final animated value can be returned by calling the animGroup function.
-
-```javascript
-animationGroupName(time);
-```
-#### `animationGroup()` Function Inputs
-
 - `time` Incrementing animation time
   - Type: `number`
   - Required: `true`
@@ -187,11 +174,8 @@ const inKeys = [
   }
 ];
 
-// Create new animation group
-const animIn = eKeys.AnimGroup(inKeys);
-
-// Animate animation group
-animIn(time);
+// Animate
+eKeys.animate(inKeys, time);
 ```
 
 [Back To Top ↑]
@@ -241,8 +225,7 @@ animIn(time);
   const outKeys;
   const animOut = true;
   const keys = animOut ? [...inKeys] : [...inKeys, ...outKeys];
-  const animGroup = eKeys.AnimGroup(keys);
-  animGroup(time);
+  eKeys.animate(keys, time);
   ```
 
   </p>
