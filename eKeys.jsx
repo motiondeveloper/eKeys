@@ -2,8 +2,8 @@
 // The function that's called from After Effects
 // as eKeys.animate()
 'animate': function(
-  inputKeyframes = requiredArgumentError('Keyframe Array', '.animate() inputs'),
-  inputTime = requiredArgumentError('Input Time', '.animate() inputs')
+  inputKeyframes,
+  inputTime
 ) {
 
 // More reliable version of standard js typeof
@@ -45,11 +45,12 @@ const isValidType = (argumentType, expectedType) => {
 // and checks if each variable is of the expected type and
 // returns a TypeError if it's not
 const checkTypes = checkingArray => {
-  checkingArray.map(check => {
-    const argumentType = getType(check[0]);
-    const expectedType = check[1];
+  checkingArray.map(checking => {
+    const name = checking[0];
+    const argumentType = getType(checking[1]);
+    const expectedType = checking[2];
     if (!isValidType(argumentType, expectedType)) {
-      typeErrorMessage(check[0], expectedType, argumentType);
+      typeErrorMessage(name, expectedType, argumentType);
     }
   });
 };
@@ -69,12 +70,12 @@ const validateKeyframe = (key, index) => {
 
   // Check data types of keyframe parameters
   checkTypes([
-    [keyTime, 'number'],
-    [keyValue, ['number', 'array']],
-    [easeIn, 'number'],
-    [easeOut, 'number'],
-    [velocityIn, 'number'],
-    [velocityOut, 'number'],
+    [`Keyframe ${index} time`, keyTime, `number`],
+    [`Keyframe ${index} value`, keyValue, [`number`, `array`]],
+    [`Keyframe ${index} easeIn`, easeIn, `number`],
+    [`Keyframe ${index} easeOut`, easeOut, `number`],
+    [`Keyframe ${index} velocityIn`, velocityIn, `number`],
+    [`Keyframe ${index} velocityOut`, velocityOut, `number`],
   ]);
 
   // Return validated keyframe
@@ -90,13 +91,16 @@ const validateKeyframe = (key, index) => {
   return validKey;
 };
 
+// Validate function inputs
+checkTypes([
+  ['.animat() input keyframes', inputKeyframes, 'array'],
+  ['.animate() input time', inputTime, 'number']
+]);
+
 // Validate and sort the given keys
 const validKeys = inputKeyframes
   .map((key, index) => validateKeyframe(key, index))
   .sort((a, b) => a.keyTime - b.keyTime);
-
-// Validate time input
-checkTypes([[inputTime, 'number']]);
 
 // Returns the final animated value
 // This is the function that's returned
