@@ -93,7 +93,7 @@ const validateKeyframe = (key, index) => {
 
 // Validate function inputs
 checkTypes([
-  ['.animat() input keyframes', inputKeyframes, 'array'],
+  ['.animate() input keyframes', inputKeyframes, 'array'],
   ['.animate() input time', inputTime, 'number']
 ]);
 
