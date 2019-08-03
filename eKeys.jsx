@@ -1,5 +1,6 @@
 {
-  
+// The function that's called from After Effects
+// as eKeys.animate()
 'animate': function(
   inputKeyframes = requiredArgumentError('Keyframe Array', '.animate() inputs'),
   inputTime = requiredArgumentError('Input Time', '.animate() inputs')
@@ -98,7 +99,9 @@ const validKeys = inputKeyframes
 checkTypes([[inputTime, 'number']]);
 
 // Returns the final animated value
+// This is the function that's returned
 const animateBetweenKeys = function(keys, time) {
+
   // Creates bezier curve and returns function
   // to calculate eased value
   const bezier = (mX1, mY1, mX2, mY2) => {
@@ -229,10 +232,9 @@ const animateBetweenKeys = function(keys, time) {
     return bezierEasing;
   };
 
+  // Set current key to most recent keyframe
   function getCurrentKeyNum(keys, time) {
     const lastKeyNum = keys.length - 1;
-
-    // Set current key to most recent keyframe
     let curKeyNum = 0;
     while (curKeyNum < lastKeyNum && time >= keys[curKeyNum + 1].keyTime) {
       curKeyNum++;
@@ -270,19 +272,13 @@ const animateBetweenKeys = function(keys, time) {
     1 - nextKey.velocityIn / 100
   );
 
-  // Delta calculations
-  const deltaT = nextKey.keyTime - curKey.keyTime;
-
-  // Create incrementing time value that is zero
-  // at start keyframe time
+  // Incrementing time value that
+  // starts from the current keyTime
   const movedTime = Math.max(time - curKey.keyTime, 0);
 
-  // Normalize time input to maximum of one
-  // and to correct speed
-  const timeInput = Math.min(1, movedTime / deltaT);
-
-  // Get progress value according to easing spline
-  const progress = easingCurve(timeInput);
+  const animationLength = nextKey.keyTime - curKey.keyTime;
+  const linearProgress = Math.min(1, movedTime / animationLength);
+  const easedProgress = easingCurve(linearProgress);
 
   // Performs animation on each element of array individually
   const animateArrayFromProgress = (startArray, endArray, progressAmount) => {
@@ -295,6 +291,7 @@ const animateBetweenKeys = function(keys, time) {
     // Add to current key and return
     return startArray.map((item, index) => item + deltaProgressed[index]);
   };
+  
   // Animate between values according to progress
   const animateValueFromProgress = (startVal, endVal, progressAmount) => {
     const valueDelta = endVal - startVal;
@@ -302,7 +299,7 @@ const animateBetweenKeys = function(keys, time) {
   };
 
   // Return animation according to whether values are an array
-  const animateProps = [curKey.keyValue, nextKey.keyValue, progress];
+  const animateProps = [curKey.keyValue, nextKey.keyValue, easedProgress];
   return Array.isArray(curKey.keyValue) || Array.isArray(nextKey.keyValue)
     ? animateArrayFromProgress(...animateProps)
     : animateValueFromProgress(...animateProps);
