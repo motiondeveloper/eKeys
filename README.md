@@ -54,6 +54,10 @@ Its purpose is to speed up the creation of After Effects templates and other aut
 
 This version of eKeys is compatible with After Effects versions >= 16.0.1 (CC2019) which use the new [Javascript engine](https://helpx.adobe.com/after-effects/using/expression-language-reference.html).
 
+> ⚠️ Make sure your project is configured to use the JavaScript engine by going to `File > Project Settings > Expression Engine` and setting it to `JavaScript`.
+
+![Screenshot of setting the project settings panel](docs/static/ae-expression-engine.jpg)
+
 For a legacy version that works in the ExtendScript engine, view the [ExtendScript Branch](https://github.com/motiondeveloper/ekeys/tree/extendscript). Please note, this version of `eKeys` is not actively maintained.
 
 [Back To Top ↑]
