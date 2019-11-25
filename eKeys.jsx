@@ -2,8 +2,8 @@
 // The function that's called from After Effects
 // as eKeys.animate()
 'animate': function(
-  inputKeyframes,
-  inputTime
+  inputKeyframes = requiredArgumentError('Keyframe array', 'animate'),
+  inputTime = requiredArgumentError('Time', 'animate')
 ) {
 
 // Validate function inputs
