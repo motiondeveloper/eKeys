@@ -56,8 +56,11 @@ function animateBetweenKeys(keys, time) {
     // Incrementing time value that
     // starts from the current keyTime
     const movedTime = Math.max(time - curKey.keyTime, 0);
-  
+    
+    // The total duration of the animation
     const animationLength = nextKey.keyTime - curKey.keyTime;
+    
+    // Animation progress amount between 0 and 1
     const linearProgress = Math.min(1, movedTime / animationLength);
     const easedProgress = easingCurve(linearProgress);
   
