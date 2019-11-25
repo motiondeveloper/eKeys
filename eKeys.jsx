@@ -306,7 +306,7 @@ function isValidType(argumentType, expectedType) {
     return expectedType.filter(type => argumentType === type).length > 0;
   }
   return typeErrorMessage(
-    'expected type',
+    'The expected type',
     'string or array',
     getType(expectedType)
   );
