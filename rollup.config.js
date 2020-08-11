@@ -7,8 +7,6 @@ export default {
   output: {
     file: 'dist/index.jsx',
     format: 'cjs',
-    banner: '{',
-    footer: '}',
   },
   plugins: [
     typescript({
@@ -19,6 +17,6 @@ export default {
       strict: true,
       lib: ['esnext'],
     }),
-    afterEffectJsx({ functionName: 'animate' }),
+    afterEffectJsx(),
   ],
 };

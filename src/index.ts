@@ -386,4 +386,10 @@ function animate(inputKeyframes: inputKey[], inputTime: number) {
   }
 }
 
-export default animate;
+const aNumber = 5;
+const aString = 'hello!';
+function aFunction() {
+  return 'hello';
+}
+
+export { animate, aNumber, aFunction, aString };
