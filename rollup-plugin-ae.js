@@ -35,8 +35,14 @@ export default function afterEffectsJsx(options = {}) {
             .replace(`;\n"${name}"`, `,\n"${name}"`))
       );
 
+      // Indent code
+      fixedCode = fixedCode
+        .split('\n')
+        .map(line => `	${line}`)
+        .join('\n');
+
       // Wrap in braces
-      const newCode = `{\n${fixedCode.trim()}\n}`;
+      const newCode = `{\n	${fixedCode.trim()}\n}`;
       // Delete original file
       delete bundle['index.jsx'];
       // Add file with replaced code
