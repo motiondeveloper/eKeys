@@ -5,7 +5,7 @@ export default function afterEffectsJsx(options = {}) {
       const originalFile = bundle['index.jsx'];
       const newCode = originalFile.code
         .replace("'use strict';", '')
-        .replace('function animate(', '"animate": function(')
+        .replace(/function .*\(/, '"animate": function(')
         .replace('module.exports = animate;', '');
       delete bundle['index.jsx'];
       console.log(bundle);
