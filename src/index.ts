@@ -385,3 +385,5 @@ function animate(inputKeyframes: inputKey[], inputTime: number) {
     );
   }
 }
+
+export default animate;
