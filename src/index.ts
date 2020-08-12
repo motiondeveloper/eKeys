@@ -15,6 +15,7 @@ interface eKey extends inputKey {
   velocityIn: number;
   velocityOut: number;
 }
+
 // The function that's called from After Effects
 // as eKeys.animate()
 function animate(inputKeyframes: inputKey[], inputTime: number) {
@@ -386,10 +387,4 @@ function animate(inputKeyframes: inputKey[], inputTime: number) {
   }
 }
 
-const aNumber = 5;
-const aString = 'hello!';
-function aFunction() {
-  return 'hello';
-}
-
-export { animate, aNumber, aFunction, aString };
+export { animate };
