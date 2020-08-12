@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc",
     "build": "rollup -c",
-    "watch": "rollup -cw"
+    "watch": "rollup -cw",
+    "release": "hub release create -a 'dist/eKeys.jsx"
   },
   "repository": {
     "type": "git",
