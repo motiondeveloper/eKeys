@@ -1,5 +1,5 @@
 import typescript from '@rollup/plugin-typescript';
-import afterEffectJsx from './rollup-plugin-ae';
+import afterEffectJsx from 'rollup-plugin-ae-jsx';
 
 export default {
   input: 'src/index.ts',

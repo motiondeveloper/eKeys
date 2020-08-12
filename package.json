@@ -31,6 +31,7 @@
     "@rollup/plugin-typescript": "^5.0.2",
     "prettier": "^1.16.4",
     "rollup": "^2.23.1",
+    "rollup-plugin-ae-jsx": "^1.0.1",
     "tslib": "^2.0.1",
     "typescript": "^3.9.7"
   },
