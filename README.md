@@ -28,6 +28,8 @@ It comes in the form of a `.jsx` file that's imported into the project, and a se
 
 Its purpose is to speed up the creation of After Effects templates and other automated work.
 
+> **eKeys is written in TypeScript using our [Expression Library Template](https://github.com/motiondeveloper/expressions-library-template)**
+
 ### Features
 
 - Animate between numbers or arrays
@@ -43,6 +45,10 @@ Its purpose is to speed up the creation of After Effects templates and other aut
 - [Contents](#contents)
 - [Compatibility](#compatibility)
 - [Usage](#usage)
+  - [1. **Download and import `eKeys.jsx` into your After Effects project**](#1-download-and-import-ekeysjsx-into-your-after-effects-project)
+  - [2. **Add a reference to the library in your expression**](#2-add-a-reference-to-the-library-in-your-expression)
+  - [3. **Create an array of keyframes**](#3-create-an-array-of-keyframes)
+  - [4. **Animate between the keys**](#4-animate-between-the-keys)
 - [Example](#example)
 - [Helpful Snippets](#helpful-snippets)
 - [By animators, for animators](#by-animators-for-animators)
@@ -94,12 +100,13 @@ const keys = [
     keyValue: [0, 0],
     easeIn: 0,
     easeOut: 66,
-  },{
+  },
+  {
     keyTime: 2,
     keyValue: [thisComp.width / 2, 0],
     easeIn: 90,
     easeOut: 0,
-  }
+  },
 ];
 ```
 
@@ -132,8 +139,8 @@ const keys = [
   - Required: `false`
   - Default: `0`
   - Range: `0-100`
-</details>
-<br>
+    </details>
+    <br>
 
 > While it is recommended you order the keyframes according to their `keyTime` for the sake of readability, it is not required as they are sorted before the animation is calculated.
 
@@ -144,6 +151,7 @@ The final animated value can be returned by calling the `animate` function.
 ```javascript
 eKeys.animate(keys, time);
 ```
+
 #### `animate()` Function Inputs
 
 - `keys` Array of keyframes
@@ -170,12 +178,13 @@ const inKeys = [
     keyValue: 0,
     easeIn: 0,
     easeOut: 66,
-  },{
+  },
+  {
     keyTime: 2,
     keyValue: 250,
     easeIn: 90,
     easeOut: 0,
-  }
+  },
 ];
 
 // Animate
@@ -206,11 +215,12 @@ eKeys.animate(inKeys, time);
       keyTime: 0,
       keyValue: [0, 50],
       ...keyDefaults,
-    },{
+    },
+    {
       keyTime: 2,
       keyValue: [800, 50],
       ...keyDefaults,
-    }
+    },
   ];
   ```
 
@@ -244,14 +254,14 @@ eKeys.animate(inKeys, time);
   <details><summary>View Code</summary>
     <p>
 
-    ```javascript
-    const keys;
-    const enableSpin = true;
-    if (!enableSpin) {
-      // Remove keyframes 4 and 5
-      keys.splice(3, 2);
-    }
-    ```
+  ```javascript
+  const keys;
+  const enableSpin = true;
+  if (!enableSpin) {
+    // Remove keyframes 4 and 5
+    keys.splice(3, 2);
+  }
+  ```
 
     </p>
     </details>
