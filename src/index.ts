@@ -297,10 +297,10 @@ function animate(inputKeyframes: inputKey[], inputTime: number) {
 
     // Alert the user if an eKey is missing
     // the required arguments
-    if (!keyTime) {
+    if (keyTime == null) {
       requiredArgumentError('keyValue', `keyframe ${index}`);
     }
-    if (!keyValue) {
+    if (keyValue == null) {
       requiredArgumentError('keyValue', `keyframe ${index}`);
     }
 
