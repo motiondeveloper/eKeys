@@ -36,5 +36,7 @@
     "tslib": "^2.0.1",
     "typescript": "^3.9.7"
   },
-  "dependencies": {}
+  "dependencies": {
+    "expression-globals-typescript": "^1.1.1"
+  }
 }
