@@ -59,3 +59,115 @@ test('animates between arrays', () => {
     )
   ).toEqual([0.5, 0.5, 0.5]);
 });
+
+test('errors if keys are different dimensions', () => {
+  expect(() =>
+    animate(
+      [
+        { keyTime: 0, keyValue: 0 },
+        { keyTime: 1, keyValue: [1, 1, 1] },
+      ],
+      0.5
+    )
+  ).toThrowError(
+    'Keyframe 0 and 1 must be of the same dimension. Received number and array'
+  );
+});
+
+test('errors if a key value is missing', () => {
+  expect(() =>
+    // @ts-ignore
+    animate([{ keyTime: 0 }, { keyTime: 1, keyValue: 1 }], 0.5)
+  ).toThrowError('keyValue is required in keyframe 0');
+});
+
+test('errors if a key time is missing', () => {
+  expect(() =>
+    // @ts-ignore
+    animate([{ keyValue: 0 }, { keyTime: 1, keyValue: 1 }], 0.5)
+  ).toThrowError('keyValue is required in keyframe 0');
+});
+
+test('errors if a key time is a string', () => {
+  expect(() =>
+    animate(
+      [
+        // @ts-ignore
+        { keyValue: 0, keyTime: '0' },
+        { keyTime: 1, keyValue: 1 },
+      ],
+      0.5
+    )
+  ).toThrowError('Keyframe 0 time must be of type number. Received string');
+});
+
+test('errors if a key value is a string', () => {
+  expect(() =>
+    animate(
+      [
+        // @ts-ignore
+        { keyValue: '0', keyTime: 0 },
+        { keyTime: 1, keyValue: 1 },
+      ],
+      0.5
+    )
+  ).toThrowError(
+    'Keyframe 0 value must be of type number,array. Received string'
+  );
+});
+
+test('errors if easeIn is a string', () => {
+  expect(() =>
+    animate(
+      [
+        // @ts-ignore
+        { keyValue: 0, keyTime: 0, easeIn: '0' },
+        { keyTime: 1, keyValue: 1 },
+      ],
+      0.5
+    )
+  ).toThrowError('Keyframe 0 easeIn must be of type number. Received string');
+});
+
+test('errors if easeOut is a string', () => {
+  expect(() =>
+    animate(
+      [
+        // @ts-ignore
+        { keyValue: 0, keyTime: 0, easeOut: '0' },
+        { keyTime: 1, keyValue: 1 },
+      ],
+      0.5
+    )
+  ).toThrowError('Keyframe 0 easeOut must be of type number. Received string');
+});
+
+test('errors if velocityIn is a string', () => {
+  expect(() =>
+    animate(
+      [
+        // @ts-ignore
+        { keyValue: 0, keyTime: 0, velocityIn: '0' },
+        { keyTime: 1, keyValue: 1 },
+      ],
+      0.5
+    )
+  ).toThrowError(
+    'Keyframe 0 velocityIn must be of type number. Received string'
+  );
+});
+
+test('errors if velocityOut is a string', () => {
+  expect(() =>
+    animate(
+      [
+        // @ts-ignore
+        { keyValue: 0, keyTime: 0, velocityOut: '0' },
+        { keyTime: 1, keyValue: 1 },
+      ],
+      0.5
+    )
+  ).toThrowError(
+    'Keyframe 0 velocityOut must be of type number. Received string'
+  );
+});
