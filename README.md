@@ -191,6 +191,14 @@ const inKeys = [
 eKeys.animate(inKeys, time);
 ```
 
+You can also [destructure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) `animate` from the `sourceData` object:
+
+```javascript
+const { animate } = footage('eKeys.jsx').sourceData;
+// ...
+animate(inKeys, time);
+```
+
 [Back To Top ↑]
 
 ## Helpful Snippets
