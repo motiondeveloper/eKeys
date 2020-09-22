@@ -387,4 +387,6 @@ function animate(inputKeyframes: inputKey[], inputTime: number) {
   }
 }
 
-export { animate };
+const version: string = '_npmVersion';
+
+export { animate, version };

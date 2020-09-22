@@ -1,15 +1,15 @@
 {
   "name": "ekeys",
-  "version": "1.0.0",
+  "version": "4.2.1",
   "description": "Animation engine for After Effects expressions",
   "private": true,
-  "main": "dist/index.js",
+  "main": "dist/eKeys.jsx",
   "scripts": {
     "test": "jest --watch",
     "tsc": "tsc",
     "build": "rollup -c",
     "watch": "rollup -cw",
-    "release": "hub release create -a 'dist/eKeys.jsx"
+    "release": "npm run build && gh release create $npm_package_version $npm_package_main"
   },
   "repository": {
     "type": "git",
