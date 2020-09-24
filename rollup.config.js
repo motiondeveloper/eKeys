@@ -7,8 +7,9 @@ export default {
   input: 'src/index.ts',
   output: {
     file: pkg.main,
-    format: 'cjs',
+    format: 'es',
   },
+  external: Object.keys(pkg.dependencies),
   plugins: [
     replace({
       _npmVersion: pkg.version,
