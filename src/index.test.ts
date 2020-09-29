@@ -1,4 +1,12 @@
+import { Layer } from 'expression-globals-typescript';
 import { animate } from './index';
+
+// This let's Jest: ReferenceError: Cannot access before initialization
+// https://stackoverflow.com/questions/61157392/jest-mock-aws-sdk-referenceerror-cannot-access-before-initialization
+jest.mock('expression-globals-typescript', () => {
+  const mLayer = { getItem: jest.fn().mockReturnThis(), promise: jest.fn() };
+  return { Layer: jest.fn(() => mLayer) };
+});
 
 test('animates between default keys', () => {
   expect(
