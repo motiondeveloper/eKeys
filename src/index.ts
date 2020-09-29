@@ -123,18 +123,37 @@ function animate(
 
     // Performs animation on each element of array individually
     function animateArrayFromProgress(
-      startArray: number[],
-      endArray: number[],
+      startArray: Vector,
+      endArray: Vector,
       progressAmount: number
-    ): number[] {
-      // Array Subtraction
-      const arrayDelta = endArray.map(
-        (item, index) => item - startArray[index]
-      );
-      // Multiply difference by progress
-      const deltaProgressed = arrayDelta.map(item => item * progressAmount);
-      // Add to current key and return
-      return startArray.map((item, index) => item + deltaProgressed[index]);
+    ): Vector {
+      if (startArray.length !== endArray.length) {
+        // Check that the key values are the same dimension
+        throw new TypeError(
+          `Keyframe ${curKeyNum} and ${curKeyNum +
+            1} values must be of the same dimension. Received ${
+            startArray.length
+          } and ${endArray.length}`
+        );
+      } else {
+        // Arrays are the same length
+        // TypeScript doesn't know if the Array elements exist in a .map()
+        // so we need to provide a fallback
+        // Array Subtraction
+        const arrayDelta: Vector = endArray.map((dimension, index) => {
+          const curKeyDim = dimension || 0;
+          const nextKeyDim = startArray[index] || 0;
+          return curKeyDim - nextKeyDim;
+        }) as Vector;
+        // Multiply difference by progress
+        const deltaProgressed = arrayDelta.map(
+          item => (item || 0) * progressAmount
+        );
+        // Add to current key and return
+        return startArray.map(
+          (item, index) => item || 0 + deltaProgressed[index]
+        ) as Vector;
+      }
     }
 
     // Animate between values according to progress
