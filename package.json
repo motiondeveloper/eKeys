@@ -1,6 +1,6 @@
 {
   "name": "ekeys",
-  "version": "4.3.0",
+  "version": "4.4.0",
   "description": "Animation engine for After Effects expressions",
   "private": true,
   "main": "dist/eKeys.jsx",
@@ -40,6 +40,6 @@
     "typescript": "^3.9.7"
   },
   "dependencies": {
-    "expression-globals-typescript": "^2.1.0"
+    "expression-globals-typescript": "^3.0.0"
   }
 }

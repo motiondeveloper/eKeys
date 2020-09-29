@@ -149,7 +149,7 @@ const keys = [
 The final animated value can be returned by calling the `animate` function.
 
 ```javascript
-eKeys.animate(keys, time);
+eKeys.animate(keys, time? = thisLayer.time);
 ```
 
 #### `animate()` Function Inputs
@@ -188,7 +188,7 @@ const inKeys = [
 ];
 
 // Animate
-eKeys.animate(inKeys, time);
+eKeys.animate(inKeys);
 ```
 
 You can also [destructure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) `animate` from the `sourceData` object:
@@ -196,7 +196,7 @@ You can also [destructure](https://developer.mozilla.org/en-US/docs/Web/JavaScri
 ```javascript
 const { animate } = footage('eKeys.jsx').sourceData;
 // ...
-animate(inKeys, time);
+animate(inKeys);
 ```
 
 [Back To Top ↑]
@@ -247,7 +247,7 @@ animate(inKeys, time);
   const outKeys;
   const animOut = true;
   const keys = animOut ? [...inKeys] : [...inKeys, ...outKeys];
-  eKeys.animate(keys, time);
+  eKeys.animate(keys);
   ```
 
   </p>
