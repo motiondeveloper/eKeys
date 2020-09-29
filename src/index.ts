@@ -106,7 +106,7 @@ function animate(
     // or numbers, return an error
     throw Error(
       `Keyframe ${curKeyNum} and ${curKeyNum +
-        1} must be of the same dimension. Received ${getType(
+        1} values must be of the same type. Received ${getType(
         curKey.keyValue
       )} and ${getType(nextKey.keyValue)}`
     );
@@ -300,8 +300,21 @@ function animate(
       easeOut = 33,
       velocityIn = 0,
       velocityOut = 0,
+      ...nonValidKeyProps
     } = key;
-
+    const invalidPropNames = Object.getOwnPropertyNames(nonValidKeyProps);
+    if (invalidPropNames.length !== 0) {
+      const triedTime = invalidPropNames.indexOf('time') > -1;
+      const triedValue = invalidPropNames.indexOf('value') > -1;
+      // Extra parameters were added to a keyframe
+      throw new Error(
+        `Unexpected property on keyframe ${index}: ${invalidPropNames.join(
+          ', '
+        )}${triedTime ? `. Did you mean "keyTime"?` : ``}${
+          triedValue ? `. Did you mean "keyValue"?` : ``
+        }`
+      );
+    }
     // Alert the user if an eKey is missing
     // the required arguments
     if (keyTime == null) {
