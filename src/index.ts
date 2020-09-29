@@ -1,4 +1,8 @@
-type keyVal = number | number[];
+import { Layer, Vector } from 'expression-globals-typescript';
+
+const thisLayer = new Layer();
+
+type keyVal = number | Vector;
 
 interface inputKey {
   keyTime: number;
@@ -18,7 +22,10 @@ interface eKey extends inputKey {
 
 // The function that's called from After Effects
 // as eKeys.animate()
-function animate(inputKeyframes: inputKey[], inputTime: number) {
+function animate(
+  inputKeyframes: inputKey[],
+  inputTime: number = thisLayer.time
+) {
   // Validate function inputs
   checkTypes([
     ['.animate() input keyframes', inputKeyframes, 'array'],
