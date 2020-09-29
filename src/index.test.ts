@@ -78,7 +78,7 @@ test('errors if keys are different dimensions', () => {
       0.5
     )
   ).toThrowError(
-    'Keyframe 0 and 1 must be of the same dimension. Received number and array'
+    'Keyframe 0 and 1 values must be of the same type. Received number and array'
   );
 });
 
@@ -178,4 +178,18 @@ test('errors if velocityOut is a string', () => {
   ).toThrowError(
     'Keyframe 0 velocityOut must be of type number. Received string'
   );
+});
+
+test('errors on unexpected keyframe property', () => {
+  expect(() =>
+    // @ts-ignore
+    animate([{ keyTime: 0, keyValue: 0 }, { keyTime: 1, keyValue: 1 ease: 0}], 0.5)
+  ).toThrowError('Unexpected property on keyframe 1: ease');
+});
+
+test('errors if values are arrays of different lengths', () => {
+  expect(() =>
+    // @ts-ignore
+    animate([{ keyTime: 0, keyValue: [0, 0] }, { keyTime: 1, keyValue: [1, 1, 1]}], 0.5)
+  ).toThrowError('Keyframe 0 and 1 values must be of the same dimension. Received 2 and 3');
 });
