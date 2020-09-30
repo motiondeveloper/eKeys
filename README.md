@@ -159,7 +159,7 @@ eKeys.animate(keys, time? = thisLayer.time);
   - Required: `true`
 - `time` Incrementing animation time
   - Type: `number`
-  - Required: `true`
+  - Required: `false`
 
 [Back To Top ↑]
 
