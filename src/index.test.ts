@@ -182,14 +182,28 @@ test('errors if velocityOut is a string', () => {
 
 test('errors on unexpected keyframe property', () => {
   expect(() =>
-    // @ts-ignore
-    animate([{ keyTime: 0, keyValue: 0 }, { keyTime: 1, keyValue: 1 ease: 0}], 0.5)
+    animate(
+      [
+        { keyTime: 0, keyValue: 0 },
+        // @ts-ignore
+        { keyTime: 1, keyValue: 1, ease: 0 },
+      ],
+      0.5
+    )
   ).toThrowError('Unexpected property on keyframe 1: ease');
 });
 
 test('errors if values are arrays of different lengths', () => {
   expect(() =>
     // @ts-ignore
-    animate([{ keyTime: 0, keyValue: [0, 0] }, { keyTime: 1, keyValue: [1, 1, 1]}], 0.5)
-  ).toThrowError('Keyframe 0 and 1 values must be of the same dimension. Received 2 and 3');
+    animate(
+      [
+        { keyTime: 0, keyValue: [0, 0] },
+        { keyTime: 1, keyValue: [1, 1, 1] },
+      ],
+      0.5
+    )
+  ).toThrowError(
+    'Keyframe 0 and 1 values must be of the same dimension. Received 2 and 3'
+  );
 });
