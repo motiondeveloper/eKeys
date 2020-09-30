@@ -141,17 +141,17 @@ function animate(
         // so we need to provide a fallback
         // Array Subtraction
         const arrayDelta: Vector = endArray.map((dimension, index) => {
-          const curKeyDim = dimension || 0;
-          const nextKeyDim = startArray[index] || 0;
-          return curKeyDim - nextKeyDim;
+          const curKeyDim = dimension as number;
+          const nextKeyDim = startArray[index] as number;
+          return (curKeyDim - nextKeyDim) as number;
         }) as Vector;
         // Multiply difference by progress
         const deltaProgressed = arrayDelta.map(
-          item => (item || 0) * progressAmount
+          item => (item as number) * progressAmount
         );
         // Add to current key and return
         return startArray.map(
-          (item, index) => item || 0 + deltaProgressed[index]
+          (item, index) => ((item as number) + deltaProgressed[index]) as number
         ) as Vector;
       }
     }
