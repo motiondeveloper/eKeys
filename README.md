@@ -1,313 +1,76 @@
-<!-- Links -->
+# 🔑 aeFunctions
 
-[back to top ↑]: #ekeys-
-
-<div align="center">
-
-# eKeys <!-- omit in toc -->
-
-An After Effects animation engine built for expressions.
-
-**[Usage](#usage) | [Example](#example) | [Contact](#contact)**
-
-![Keyframe Code to Bezier Curve](docs/static/header-img.svg)
+**Keyframe animation in After Effects Expressions**
 
 ---
 
-### [✨ Download eKeys ✨](https://github.com/motiondeveloper/eKeys/releases)<!-- omit in toc -->
+✨ View more details on our website: **[motiondeveloper.com/tools/eKeys](www.motiondeveloper.com/tools/ekeys)**
 
 ---
 
-</div>
+- Animate dynamically with expressions
+- Full control over easing
+- Simple and keyframe-like API
 
-## Overview
+---
 
-`eKeys` is a system of doing animation in Adobe After effects entirely within expressions, with the same level on control as keyframes.
+🏗 This project was created with [create-expression-lib](https://github.com/motiondeveloper/create-expression-lib) - our utility for creating and managing After Effects `.jsx` libraries.
 
-It comes in the form of a `.jsx` file that's imported into the project, and a set of expressions to be applied to each property you wish to animate, with the values for each 'keyframe' to be added in the expression.
+---
 
-Its purpose is to speed up the creation of After Effects templates and other automated work.
+## Setup
 
-> **eKeys is written in TypeScript using our [Expression Library Template](https://github.com/motiondeveloper/expressions-library-template)**
+1. Download the latest version from the [releases](https://github.com/motiondeveloper/ekeys/releases) page.
+2. Import it into After Effects
 
-### Features
+## Expression
 
-- Animate between numbers or arrays
-- Full control over easing, including incoming and outgoing velocities
-- No installation necessary, just import 1 file
-- Simple and succinct expression interface
-- Free and open source
+Usage:
 
-## Contents
-
-- [Overview](#overview)
-  - [Features](#features)
-- [Contents](#contents)
-- [Compatibility](#compatibility)
-- [Usage](#usage)
-  - [1. **Download and import `eKeys.jsx` into your After Effects project**](#1-download-and-import-ekeysjsx-into-your-after-effects-project)
-  - [2. **Add a reference to the library in your expression**](#2-add-a-reference-to-the-library-in-your-expression)
-  - [3. **Create an array of keyframes**](#3-create-an-array-of-keyframes)
-  - [4. **Animate between the keys**](#4-animate-between-the-keys)
-- [Example](#example)
-- [Helpful Snippets](#helpful-snippets)
-- [By animators, for animators](#by-animators-for-animators)
-- [To Do](#to-do)
-- [License](#license)
-- [Contact](#contact)
-
-## Compatibility
-
-This version of eKeys is compatible with After Effects versions >= 16.0.1 (CC2019) which use the new [Javascript engine](https://helpx.adobe.com/after-effects/using/expression-language-reference.html).
-
-> ⚠️ Make sure your project is configured to use the JavaScript engine by going to `File > Project Settings > Expression Engine` and setting it to `JavaScript`.
-
-![Screenshot of setting the project settings panel](docs/static/ae-expression-engine.jpg)
-
-For a legacy version that works in the ExtendScript engine, view the [ExtendScript Branch](https://github.com/motiondeveloper/ekeys/tree/extendscript). Please note, this version of `eKeys` is not actively maintained.
-
-[Back To Top ↑]
-
-## Usage
-
-### 1. **Download and import `eKeys.jsx` into your After Effects project**
-
-Head over to the [releases](https://github.com/motiondeveloper/eKeys/releases) page to download the latest version of the `eKeys.jsx` file.
-
-This is the JSON file that contains the necessary code to run eKeys. You may not be able to drag and drop it into your project, in which case you will need to use the import dialog.
-
-### 2. **Add a reference to the library in your expression**
-
-To reference the library in an expression, you need to assign it to a variable. This is done via the line:
-
-```javascript
-const eKeys = footage('eKeys.jsx').sourceData;
-```
-
-> ⚠️ Since After Effects doesn't count footage items that are only referenced within expressions as used, it's recommended that you also place the `eKeys.jsx` file in any compositions where it is referenced.
->
-> This will ensure After Effects includes the file when collecting assets or packaging into a Motion Graphics Template.
-
-### 3. **Create an array of keyframes**
-
-Each keyframe is represented as an object within an array.
-
-```javascript
-// Example keyframe array
-const keys = [
-  {
-    keyTime: 1,
-    keyValue: [0, 0],
-    easeIn: 0,
-    easeOut: 66,
-  },
-  {
-    keyTime: 2,
-    keyValue: [thisComp.width / 2, 0],
-    easeIn: 90,
-    easeOut: 0,
-  },
-];
-```
-
-<details><summary><strong>Keyframe Object Properties</strong></summary>
-<br>
-
-- `keyTime` Where the keyframe is in time, in seconds
-  - Type: `number`
-  - Required: `true`
-- `keyValue` Value of the keyframe
-  - Type: `number` or `array`
-  - Required: `true`
-- `easeIn` Ease in amount
-  - Type: `number`
-  - Required: `false`
-  - Default: `33`
-  - Range: `0-100`
-- `easeOut` Ease out amount
-  - Type: `number`
-  - Required: `false`
-  - Default: `33`
-  - Range: `0-100`
-- `velocityIn` Incoming speed
-  - Type: `number`
-  - Required: `false`
-  - Default: `0`
-  - Range: `0-100`
-- `velocityOut` Outgoing speed
-  - Type: `number`
-  - Required: `false`
-  - Default: `0`
-  - Range: `0-100`
-    </details>
-    <br>
-
-> While it is recommended you order the keyframes according to their `keyTime` for the sake of readability, it is not required as they are sorted before the animation is calculated.
-
-### 4. **Animate between the keys**
-
-The final animated value can be returned by calling the `animate` function.
-
-```javascript
-eKeys.animate(keys, time? = thisLayer.time);
-```
-
-#### `animate()` Function Inputs
-
-- `keys` Array of keyframes
-  - Type: `array`
-  - Required: `true`
-- `time` Incrementing animation time
-  - Type: `number`
-  - Required: `false`
-
-[Back To Top ↑]
-
-## Example
-
-An example setup of an animation group with a couple of keyframes:
-
-```javascript
-// Import eKeys library
-const eKeys = footage('eKeys.jsx').sourceData;
-
-// Create an array of keyframes
-const inKeys = [
-  {
-    keyTime: 1,
-    keyValue: 0,
-    easeIn: 0,
-    easeOut: 66,
-  },
-  {
-    keyTime: 2,
-    keyValue: 250,
-    easeIn: 90,
-    easeOut: 0,
-  },
-];
-
-// Animate
-eKeys.animate(inKeys);
-```
-
-You can also [destructure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) `animate` from the `sourceData` object:
-
-```javascript
+```js
 const { animate } = footage('eKeys.jsx').sourceData;
-// ...
-animate(inKeys);
+animate([
+  {
+    keyTime: 0,
+    keyValue: [0, 0],
+    easeOut: 90,
+  }, {
+    keyTime: 3,
+    keyValue: [960, 540],
+    easeIn: 80,
+  }
+]);
 ```
 
-[Back To Top ↑]
+## Development
 
-## Helpful Snippets
+1. **Clone project locally**
 
-- **Create default keyframe parameters**
+   ```sh
+   git clone https://github.com/motiondeveloper/eKeys.git
+   cd aeFunctions
+   ```
 
-  Use the JavaScript [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) to use a set of default parameters across keyframes.
+2. **Start Rollup**
 
-  <details><summary>View Code</summary>
-  <p>
+   Start Rollup in watch mode to automatically refresh your code as you make changes, by running:
 
-  ```javascript
-  const keyDefaults = {
-    easeIn: 90,
-    easeOut: 50,
-    velocityIn: 10,
-    velocityOut: 50,
-  };
+   ```sh
+   npm run watch
+   ```
 
-  const keys = [
-    {
-      keyTime: 0,
-      keyValue: [0, 50],
-      ...keyDefaults,
-    },
-    {
-      keyTime: 2,
-      keyValue: [800, 50],
-      ...keyDefaults,
-    },
-  ];
-  ```
+   _You can run also run a once off build:_ `npm run build`
 
-  </p>
-  </details>
+3. **Edit the `src` files**
 
-- **Merge multiple keyframes groups**
+   _The `index.ts` contains an example expression setup._
 
-  Easily merge multiple keyframe arrays to be animated using the JavaScript [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax).
+   Any values exported from this file will be included in your library, for example:
 
-    <details><summary>View Code</summary>
-  <p>
+   ```js
+   export { someValue };
+   ```
 
-  ```javascript
-  const inKeys;
-  const outKeys;
-  const animOut = true;
-  const keys = animOut ? [...inKeys] : [...inKeys, ...outKeys];
-  eKeys.animate(keys);
-  ```
+4. **Import the `dist` file into After Effects**
 
-  </p>
-  </details>
-
-  This could also be done by creating multiple `AnimGroup's`.
-
-- **Remove specific keyframes**
-
-  Remove one or more keyframes based on another variable.
-
-  <details><summary>View Code</summary>
-    <p>
-
-  ```javascript
-  const keys;
-  const enableSpin = true;
-  if (!enableSpin) {
-    // Remove keyframes 4 and 5
-    keys.splice(3, 2);
-  }
-  ```
-
-    </p>
-    </details>
-
-[Back To Top ↑]
-
-## By animators, for animators
-
-`eKeys` is built in such a way to make it easy for animators to use, based on the inputs and workflows they're used to when creating standard After Effects keyframes.
-
-Outside of this context, `eKeys` might not make much sense or appear a little strange. It's not for everyone!
-
-[Back To Top ↑]
-
-## To Do
-
-- [x] ~~Add incoming and outgoing velocity inputs~~
-- [x] ~~Updated curve sampling to Newton-Raphson~~
-- [x] ~~Update to Javascript engine (from ExtendScript)~~
-- [x] ~~Input validation and error checking~~
-- [ ] Add option to input easing as array, same as [css cubic-bezier](https://www.w3.org/TR/css-easing-1/).
-- [ ] Add animation method input (overshoot, bounce etc)
-- [ ] Add ability to write in standard js and transform into After Effects jsx using babel
-
-[Back To Top ↑]
-
-## License
-
-This project is licensed under the terms of the GNU GPLv3 license. In summary:
-
-> Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.
-
-The `bezier` function is from [Gaëtan Renaudeau's cubic-bezier](https://github.com/gre/bezier-easing) project, and is licensed under the terms of the MIT License.
-
-[Back To Top ↑]
-
-## Contact
-
-Bugs, issues and feature requests can be submitted by filing an [issue](https://github.com/motiondeveloper/ekeys/issues) on Github. For everything else, feel free to reach out to [@modeveloper](https://twitter.com/modeveloper) on twitter.
-
-[Back To Top ↑]
+   Use the compiled output file as you would any other `.jsx` library. Any changes to the `src` files will be live updated, and After Effects will update the result of your expression.
