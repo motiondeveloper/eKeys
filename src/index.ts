@@ -2,37 +2,43 @@ import { Layer, Vector } from 'expression-globals-typescript';
 
 const thisLayer = new Layer();
 
-type keyVal = number | Vector;
+type KeyVal = number | Vector;
 
-interface inputKey {
+interface InputKey {
   keyTime: number;
-  keyValue: keyVal;
+  keyValue: KeyVal;
   easeIn?: number;
   easeOut?: number;
   velocityIn?: number;
   velocityOut?: number;
 }
 
-interface eKey extends inputKey {
+interface EKey extends InputKey {
   easeIn: number;
   easeOut: number;
   velocityIn: number;
   velocityOut: number;
 }
 
+interface AnimateOptions {
+  inputTime: number;
+  interpolator?: (progress: number) => number;
+}
+
 // The function that's called from After Effects
 // as eKeys.animate()
 function animate(
-  inputKeyframes: inputKey[],
-  inputTime: number = thisLayer.time
+  inputKeyframes: InputKey[],
+  options: AnimateOptions = { inputTime: thisLayer.time }
 ) {
+  const { inputTime = thisLayer.time, interpolator } = options;
   // Validate function inputs
   checkTypes([
     ['.animate() input keyframes', inputKeyframes, 'array'],
     ['.animate() input time', inputTime, 'number'],
   ]);
   // Validate and sort the given keys
-  const validKeys: eKey[] = inputKeyframes
+  const validKeys: EKey[] = inputKeyframes
     .map((key, index) => validateKeyframe(key, index))
     .sort((a, b) => a.keyTime - b.keyTime);
 
@@ -40,9 +46,9 @@ function animate(
 
   // Returns the final animated value
   // This is the function that's returned
-  function animateBetweenKeys(keys: eKey[], time: number) {
-    const lastKey: eKey = keys[keys.length - 1];
-    const firstKey: eKey = keys[0];
+  function animateBetweenKeys(keys: EKey[], time: number) {
+    const lastKey: EKey = keys[keys.length - 1];
+    const firstKey: EKey = keys[0];
 
     // If outside of all keys, return closest
     // key value, skip animation
@@ -54,22 +60,14 @@ function animate(
     }
 
     const curKeyNum: number = getCurrentKeyNum(keys, time);
-    const curKey: eKey = keys[curKeyNum];
-    const nextKey: eKey = keys[curKeyNum + 1];
+    const curKey: EKey = keys[curKeyNum];
+    const nextKey: EKey = keys[curKeyNum + 1];
 
     // Check to see if no animation is
     // required between current keys
     if (curKey.keyValue === nextKey.keyValue) {
       return curKey.keyValue;
     }
-
-    // Create easing spline based on current and next key
-    const easingCurve = bezier(
-      curKey.easeOut / 100,
-      curKey.velocityOut / 100,
-      1 - nextKey.easeIn / 100,
-      1 - nextKey.velocityIn / 100
-    );
 
     // Incrementing time value that
     // starts from the current keyTime
@@ -80,7 +78,20 @@ function animate(
 
     // Animation progress amount between 0 and 1
     const linearProgress: number = Math.min(1, movedTime / animationLength);
-    const easedProgress: number = easingCurve(linearProgress);
+
+    let easedProgress;
+    if (interpolator === undefined) {
+      // Create easing spline based on current and next key
+      const easingCurve = bezier(
+        curKey.easeOut / 100,
+        curKey.velocityOut / 100,
+        1 - nextKey.easeIn / 100,
+        1 - nextKey.velocityIn / 100
+      );
+      easedProgress = easingCurve(linearProgress);
+    } else {
+      easedProgress = interpolator(linearProgress);
+    }
 
     // Animate between values according to
     // whether they are arrays
@@ -112,7 +123,7 @@ function animate(
     );
 
     // Set current key to most recent keyframe
-    function getCurrentKeyNum(keys: eKey[], time: number): number {
+    function getCurrentKeyNum(keys: EKey[], time: number): number {
       const lastKeyNum = keys.length - 1;
       let curKeyNum = 0;
       while (curKeyNum < lastKeyNum && time >= keys[curKeyNum + 1].keyTime) {
@@ -310,7 +321,7 @@ function animate(
 
   // Make sure that a given keyframe is valid
   // Sets defaults and checks for errors
-  function validateKeyframe(key: inputKey, index: number): eKey {
+  function validateKeyframe(key: InputKey, index: number): EKey {
     // Set keyframe defaults
     const {
       keyTime,
@@ -354,7 +365,7 @@ function animate(
     ]);
 
     // Return validated keyframe
-    const validKey: eKey = {
+    const validKey: EKey = {
       keyTime,
       keyValue,
       easeIn,

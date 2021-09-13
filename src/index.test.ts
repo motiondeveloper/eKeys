@@ -15,7 +15,7 @@ test('animates between default keys', () => {
         { keyTime: 0, keyValue: 0 },
         { keyTime: 1, keyValue: 1 },
       ],
-      0.5
+      { inputTime: 0.5 }
     )
   ).toBe(0.5);
 });
@@ -27,7 +27,7 @@ test('animates between eased keys', () => {
         { keyTime: 0, keyValue: 0, easeOut: 100 },
         { keyTime: 1, keyValue: 1, easeIn: 100 },
       ],
-      0.5
+      { inputTime: 0.5 }
     )
   ).toBe(0.5);
 });
@@ -39,7 +39,7 @@ test('animates between custom velocity keys', () => {
         { keyTime: 0, keyValue: 0, velocityOut: 20 },
         { keyTime: 1, keyValue: 1, velocityIn: 20 },
       ],
-      0.5
+      { inputTime: 0.5 }
     )
   ).toBe(0.5);
 });
@@ -51,7 +51,7 @@ test('re-orders keys by time', () => {
         { keyTime: 2, keyValue: 1 },
         { keyTime: 3, keyValue: 0 },
       ],
-      2.5
+      { inputTime: 2.5 }
     )
   ).toBe(0.5);
 });
@@ -63,7 +63,7 @@ test('animates between arrays', () => {
         { keyTime: 0, keyValue: [0, 0, 0] },
         { keyTime: 1, keyValue: [1, 1, 1] },
       ],
-      0.5
+      { inputTime: 0.5 }
     )
   ).toEqual([0.5, 0.5, 0.5]);
 });
@@ -75,7 +75,7 @@ test('errors if keys are different dimensions', () => {
         { keyTime: 0, keyValue: 0 },
         { keyTime: 1, keyValue: [1, 1, 1] },
       ],
-      0.5
+      { inputTime: 0.5 }
     )
   ).toThrowError(
     'Keyframe 0 and 1 values must be of the same type. Received number and array'
@@ -85,14 +85,14 @@ test('errors if keys are different dimensions', () => {
 test('errors if a key value is missing', () => {
   expect(() =>
     // @ts-ignore
-    animate([{ keyTime: 0 }, { keyTime: 1, keyValue: 1 }], 0.5)
+    animate([{ keyTime: 0 }, { keyTime: 1, keyValue: 1 }], { inputTime: 0.5 })
   ).toThrowError('keyValue is required in keyframe 0');
 });
 
 test('errors if a key time is missing', () => {
   expect(() =>
     // @ts-ignore
-    animate([{ keyValue: 0 }, { keyTime: 1, keyValue: 1 }], 0.5)
+    animate([{ keyValue: 0 }, { keyTime: 1, keyValue: 1 }], { inputTime: 0.5 })
   ).toThrowError('keyValue is required in keyframe 0');
 });
 
@@ -104,7 +104,7 @@ test('errors if a key time is a string', () => {
         { keyValue: 0, keyTime: '0' },
         { keyTime: 1, keyValue: 1 },
       ],
-      0.5
+      { inputTime: 0.5 }
     )
   ).toThrowError('Keyframe 0 time must be of type number. Received string');
 });
@@ -117,7 +117,7 @@ test('errors if a key value is a string', () => {
         { keyValue: '0', keyTime: 0 },
         { keyTime: 1, keyValue: 1 },
       ],
-      0.5
+      { inputTime: 0.5 }
     )
   ).toThrowError(
     'Keyframe 0 value must be of type number,array. Received string'
@@ -132,7 +132,7 @@ test('errors if easeIn is a string', () => {
         { keyValue: 0, keyTime: 0, easeIn: '0' },
         { keyTime: 1, keyValue: 1 },
       ],
-      0.5
+      { inputTime: 0.5 }
     )
   ).toThrowError('Keyframe 0 easeIn must be of type number. Received string');
 });
@@ -145,7 +145,7 @@ test('errors if easeOut is a string', () => {
         { keyValue: 0, keyTime: 0, easeOut: '0' },
         { keyTime: 1, keyValue: 1 },
       ],
-      0.5
+      { inputTime: 0.5 }
     )
   ).toThrowError('Keyframe 0 easeOut must be of type number. Received string');
 });
@@ -158,7 +158,7 @@ test('errors if velocityIn is a string', () => {
         { keyValue: 0, keyTime: 0, velocityIn: '0' },
         { keyTime: 1, keyValue: 1 },
       ],
-      0.5
+      { inputTime: 0.5 }
     )
   ).toThrowError(
     'Keyframe 0 velocityIn must be of type number. Received string'
@@ -173,7 +173,7 @@ test('errors if velocityOut is a string', () => {
         { keyValue: 0, keyTime: 0, velocityOut: '0' },
         { keyTime: 1, keyValue: 1 },
       ],
-      0.5
+      { inputTime: 0.5 }
     )
   ).toThrowError(
     'Keyframe 0 velocityOut must be of type number. Received string'
@@ -188,7 +188,7 @@ test('errors on unexpected keyframe property', () => {
         // @ts-ignore
         { keyTime: 1, keyValue: 1, ease: 0 },
       ],
-      0.5
+      { inputTime: 0.5 }
     )
   ).toThrowError('Unexpected property on keyframe 1: ease');
 });
@@ -201,9 +201,22 @@ test('errors if values are arrays of different lengths', () => {
         { keyTime: 0, keyValue: [0, 0] },
         { keyTime: 1, keyValue: [1, 1, 1] },
       ],
-      0.5
+      { inputTime: 0.5 }
     )
   ).toThrowError(
     'Keyframe 0 and 1 values must be of the same dimension. Received 2 and 3'
   );
+});
+
+test('uses custom interpolator', () => {
+  expect(() =>
+    // @ts-ignore
+    animate(
+      [
+        { keyTime: 0, keyValue: 0 },
+        { keyTime: 1, keyValue: 1 },
+      ],
+      { inputTime: 0.5, interpolator: x => x }
+    )
+  ).toBe(0.5);
 });
