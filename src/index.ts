@@ -1,4 +1,5 @@
 import { Layer, Vector } from 'expression-globals-typescript';
+import { Interpolator, interpolators } from './interpolators';
 
 const thisLayer = new Layer();
 
@@ -22,11 +23,7 @@ interface EKey extends InputKey {
 
 interface AnimateOptions {
   inputTime: number;
-  interpolator?: (
-    progress: number,
-    easeOut?: number,
-    easeIn?: number
-  ) => number;
+  interpolator?: Interpolator;
 }
 
 // The function that's called from After Effects
@@ -449,4 +446,4 @@ function animate(
 
 const version: string = '_npmVersion';
 
-export { animate, version };
+export { animate, version, interpolators };
