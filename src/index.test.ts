@@ -68,6 +68,33 @@ test('animates between arrays', () => {
   ).toEqual([0.5, 0.5, 0.5]);
 });
 
+test('animates with custom linear interpolator', () => {
+  expect(
+    animate(
+      [
+        { keyTime: 0, keyValue: 0 },
+        { keyTime: 1, keyValue: 1 },
+      ],
+      { inputTime: 0.5, interpolator: x => x }
+    )
+  ).toBe(0.5);
+});
+
+test('animates with custom quad interpolator', () => {
+  expect(
+    animate(
+      [
+        { keyTime: 0, keyValue: 0 },
+        { keyTime: 1, keyValue: 1 },
+      ],
+      {
+        inputTime: 0.3,
+        interpolator: t => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t),
+      }
+    )
+  ).toBe(0.18);
+});
+
 test('errors if keys are different dimensions', () => {
   expect(() =>
     animate(
@@ -206,17 +233,4 @@ test('errors if values are arrays of different lengths', () => {
   ).toThrowError(
     'Keyframe 0 and 1 values must be of the same dimension. Received 2 and 3'
   );
-});
-
-test('uses custom interpolator', () => {
-  expect(() =>
-    // @ts-ignore
-    animate(
-      [
-        { keyTime: 0, keyValue: 0 },
-        { keyTime: 1, keyValue: 1 },
-      ],
-      { inputTime: 0.5, interpolator: x => x }
-    )
-  ).toBe(0.5);
 });
