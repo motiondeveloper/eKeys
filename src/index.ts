@@ -73,6 +73,12 @@ function animate(
       return curKey.keyValue;
     }
 
+    // If we're on the keyframe,
+    // return its value
+    if (time === curKey.keyTime) {
+      return curKey.keyValue;
+    }
+
     // Incrementing time value that
     // starts from the current keyTime
     const movedTime: number = Math.max(time - curKey.keyTime, 0);
