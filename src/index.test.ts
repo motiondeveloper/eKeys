@@ -1,5 +1,5 @@
 import { Layer } from 'expression-globals-typescript';
-import { animate } from './index';
+import { animate, interpolators } from './index';
 
 // This let's Jest: ReferenceError: Cannot access before initialization
 // https://stackoverflow.com/questions/61157392/jest-mock-aws-sdk-referenceerror-cannot-access-before-initialization
@@ -78,6 +78,42 @@ test('animates with custom linear interpolator', () => {
       { inputTime: 0.5, interpolator: x => x }
     )
   ).toBe(0.5);
+});
+
+test('animates with provided linear interpolator', () => {
+  expect(
+    animate(
+      [
+        { keyTime: 0, keyValue: 0 },
+        { keyTime: 1, keyValue: 1 },
+      ],
+      { inputTime: 0.5, interpolator: interpolators.linear }
+    )
+  ).toBe(0.5);
+});
+
+test('animates with provided easeInOutQuad interpolator', () => {
+  expect(
+    animate(
+      [
+        { keyTime: 0, keyValue: 0 },
+        { keyTime: 1, keyValue: 1 },
+      ],
+      { inputTime: 0.25, interpolator: interpolators.easeInOutQuad }
+    )
+  ).toBe(0.125);
+});
+
+test('animates with provided elastic interpolator', () => {
+  expect(
+    animate(
+      [
+        { keyTime: 0, keyValue: 0 },
+        { keyTime: 2, keyValue: 1 },
+      ],
+      { inputTime: 2, interpolator: interpolators.easeInElastic }
+    )
+  ).toBe(1);
 });
 
 test('animates with custom quad interpolator', () => {
