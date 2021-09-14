@@ -22,7 +22,7 @@ interface EKey extends InputKey {
 
 interface AnimateOptions {
   inputTime: number;
-  interpolator?: (progress: number) => number;
+  interpolator?: (progress: number, easeOut: number, easeIn: number) => number;
 }
 
 // The function that's called from After Effects
@@ -79,19 +79,18 @@ function animate(
     // Animation progress amount between 0 and 1
     const linearProgress: number = Math.min(1, movedTime / animationLength);
 
-    let easedProgress;
-    if (interpolator === undefined) {
-      // Create easing spline based on current and next key
-      const easingCurve = bezier(
-        curKey.easeOut / 100,
-        curKey.velocityOut / 100,
-        1 - nextKey.easeIn / 100,
-        1 - nextKey.velocityIn / 100
-      );
-      easedProgress = easingCurve(linearProgress);
-    } else {
-      easedProgress = interpolator(linearProgress);
-    }
+    const easedProgress = interpolator
+      ? // If they've passed in a custom interpolator, use that
+        // and opt out of bezier generation
+        interpolator(linearProgress, curKey.easeOut, nextKey.easeIn)
+      : // Otherwise generate a bezier function and pass in
+        // the progress amount
+        bezier(
+          curKey.easeOut / 100,
+          curKey.velocityOut / 100,
+          1 - nextKey.easeIn / 100,
+          1 - nextKey.velocityIn / 100
+        )(linearProgress);
 
     // Animate between values according to
     // whether they are arrays
